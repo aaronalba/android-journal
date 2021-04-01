@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment;
 public class JournalActivity extends SingleFragmentActivity {
     @Override
     protected Fragment createFragment() {
-        // TODO: Define the fragment that this activity will host
-        return null;
+        return new JournalFragment();
     }
 }
