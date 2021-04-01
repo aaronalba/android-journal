@@ -1,6 +1,6 @@
 /**
  * Template class that can be used for Activities that need to host a single fragment.
- * Author: Aaron Alba
+ * @author Aaron Alba
  */
 
 package com.practice.journal;
