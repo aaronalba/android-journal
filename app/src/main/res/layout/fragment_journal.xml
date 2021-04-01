@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/entry_title"
+        android:id="@+id/title_field"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -35,7 +35,7 @@
         android:layout_marginTop="16dp"
         android:text="@string/label_date"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/entry_title" />
+        app:layout_constraintTop_toBottomOf="@+id/title_field" />
 
     <EditText
         android:id="@+id/date_field"
