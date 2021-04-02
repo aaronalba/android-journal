@@ -16,17 +16,43 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.util.UUID;
+
 public class JournalFragment extends Fragment {
     private EditText mTitleField;
     private EditText mDateField;
     private ImageButton mDateButton;
     private EditText mContentField;
+    private Entry mEntry;
+
+    private static final String ARG_ENTRY_ID = "uuid";
+
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+
+
+    /**
+     * Used to create a JournalFragment with the given Id as an argument. The argument will be used
+     * to specify which Entry will be shown so that the user can modify it using this Fragment.
+     * @param entryId UUID of the Entry to be edited.
+     * @return A JournalFragment showing an Entry.
+     */
+    public static JournalFragment newInstance(UUID entryId) {
+        // create the argument
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_ENTRY_ID, entryId);
+
+        // create the JournalFragment
+        JournalFragment fragment = new JournalFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
+
 
 
     /**
