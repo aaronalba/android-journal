@@ -62,6 +62,15 @@ public class JournalListFragment extends Fragment {
 
 
     /**
+     * Lifecycle method that is called when the Activity is brought back to the visible screen of the user.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+
+    /**
      * This method inflates the options menu.
      * @param menu The options menu.
      * @param inflater The layout inflater of the menu.
@@ -73,6 +82,11 @@ public class JournalListFragment extends Fragment {
     }
 
 
+    /**
+     * This method sets the actions to be performed when an option menu has been clicked
+     * @param item The fired menu item.
+     * @return a boolean value telling the OS about the status of the action.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -98,32 +112,45 @@ public class JournalListFragment extends Fragment {
     }
 
     /*
-            Adapter Class for feeding the RecyclerView with ViewHolders from the list of entries.
-            This class creates the needed ViewHolder defined in JournalViewHolder and binds that
-            view to the Data from the List of Journal Entries, then it is shown by the RecyclerView.
-         */
+        Adapter Class for feeding the RecyclerView with ViewHolders from the list of entries.
+        This class creates the needed ViewHolder defined in JournalViewHolder and binds that
+        view to the Data from the List of Journal Entries, then it is shown by the RecyclerView.
+     */
     private class JournalAdapter extends RecyclerView.Adapter<JournalHolder> {
+        // the list containing the Entry data set for the recycler view to use
         private List<Entry> mList;
 
-
+        // creates an adapter with the given list of entries
         public JournalAdapter(Context context) {
             this.mList = EntryStash.get(context).getEntries();
         }
 
+
+        // creates the view holders that the recycler view will use
         @NonNull
         @Override
         public JournalHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             return new JournalHolder(getLayoutInflater(), parent);
         }
 
+
+        // binds the data from mList to the corresponding view holder upon the request of the recycler view
         @Override
         public void onBindViewHolder(@NonNull JournalHolder holder, int position) {
             holder.bind(mList.get(position));
         }
 
+        // the number of items in the data set held by this adapter
         @Override
         public int getItemCount() {
             return mList.size();
+        }
+
+
+        // This method updates the data set of this adapter, used for updating the UI of the recycler view
+        // @params list The list containing the Entries
+        public void setList(List<Entry> list) {
+            mList = list;
         }
     }
 
