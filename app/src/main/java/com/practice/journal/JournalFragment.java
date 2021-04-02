@@ -6,6 +6,8 @@
 package com.practice.journal;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,13 @@ public class JournalFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // retrieve the fragment argument to get the current entry to be shown
+        Bundle args = getArguments();
+        UUID id = (UUID) args.getSerializable(ARG_ENTRY_ID);
+
+        // set the entry object
+        mEntry = EntryStash.get(getContext()).getEntry(id);
     }
 
 
@@ -69,12 +78,39 @@ public class JournalFragment extends Fragment {
 
         // get references to the views in the layout
         mTitleField = view.findViewById(R.id.title_field);
+        mTitleField.setText(mEntry.getTitle()); // set the title field from the Entry
+        mTitleField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mEntry.setTitle(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
 
         mDateField = view.findViewById(R.id.date_field);
+        mDateField.setText(mEntry.getDate().toString());  // set the date field from the Entry
 
         mDateButton = view.findViewById(R.id.date_button);
 
         mContentField = view.findViewById(R.id.content_field);
+        mContentField.setText(mEntry.getContent()); // set the content field
+        mContentField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                mEntry.setContent(s.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {}
+        });
 
         return view;
     }
