@@ -67,6 +67,7 @@ public class JournalListFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        updateUI(); // update the items in the recycler view since the list might have changed
     }
 
 
@@ -109,6 +110,16 @@ public class JournalListFragment extends Fragment {
 
 
         return super.onOptionsItemSelected(item);   // default case when the menu item id does not match any known menu item
+    }
+
+
+    private void updateUI() {
+        // get the current list of Entries
+        List<Entry> list = EntryStash.get(getContext()).getEntries();
+
+        // update the list in the adapter
+        mAdapter.setList(list);
+        mAdapter.notifyDataSetChanged();
     }
 
     /*
