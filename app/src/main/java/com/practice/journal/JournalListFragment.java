@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -107,12 +108,56 @@ public class JournalListFragment extends Fragment {
             mDateTextView = itemView.findViewById(R.id.entry_date);
             mEditButton = itemView.findViewById(R.id.edit_button);
             mDeleteButton = itemView.findViewById(R.id.delete_button);
+
+            // set the click listeners to the buttons
+            mEditButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onEditClicked(v);
+                }
+            });
+
+            mDeleteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onDeleteClicked(v);
+                }
+            });
+
+            // set the click listener for when this ViewHolder is clicked
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onViewHolderClick(v);
+                }
+            });
         }
 
         // This method is called by the adapter to fill the data in this ViewHolder
         public void bind(Entry entry) {
             mTitleTextView.setText(entry.getTitle());
             mDateTextView.setText(entry.getDate().toString());
+        }
+
+        // Method to be called when the edit button is clicked
+        public void onEditClicked(View v) {
+            // TODO: Implement onEditClicked method
+            // This method will launch the Journal Activity
+            Toast.makeText(getContext(), "Edit this Entry", Toast.LENGTH_SHORT).show();
+        }
+
+        // Method to be called when the delete button is clicked
+        public void onDeleteClicked(View v) {
+            // TODO: Implement onDeleteClicked method
+            // This method will delete the Entry in the List of Entries
+            Toast.makeText(getContext(), "Delete this Entry", Toast.LENGTH_SHORT).show();
+        }
+
+        // Method to be called when this view holder is clicked
+        public void onViewHolderClick(View v) {
+            // TODO: Implement onViewHolderClick method
+            // This method will launch the JournalViewerActivity
+            Toast.makeText(getContext(), "View this Entry", Toast.LENGTH_SHORT).show();
         }
     }
 }
