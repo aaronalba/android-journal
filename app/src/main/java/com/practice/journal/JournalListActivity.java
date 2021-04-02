@@ -11,7 +11,6 @@ public class JournalListActivity extends SingleFragmentActivity {
 
     @Override
     protected Fragment createFragment() {
-        // TODO: Define the fragment that will be used by this activity
-        return null;
+        return new JournalListFragment();
     }
 }
