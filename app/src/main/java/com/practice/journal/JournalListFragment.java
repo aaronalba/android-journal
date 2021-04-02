@@ -220,9 +220,9 @@ public class JournalListFragment extends Fragment {
 
         // Method to be called when the edit button is clicked
         public void onEditClicked(View v) {
-            // TODO: Implement onEditClicked method
-            // This method will launch the Journal Activity
-            Toast.makeText(getContext(), "Edit this Entry", Toast.LENGTH_SHORT).show();
+            // Clicking the edit button will launch the JournalActivity to allow edits to the entry
+            Intent intent = JournalActivity.newIntent(getContext(), mEntry.getId());
+            startActivity(intent);
         }
 
         // Method to be called when the delete button is clicked
