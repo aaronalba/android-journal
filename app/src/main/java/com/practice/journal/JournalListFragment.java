@@ -113,6 +113,7 @@ public class JournalListFragment extends Fragment {
     }
 
 
+    // this updates the items shown in the RecyclerView
     private void updateUI() {
         // get the current list of Entries
         List<Entry> list = EntryStash.get(getContext()).getEntries();
@@ -121,6 +122,7 @@ public class JournalListFragment extends Fragment {
         mAdapter.setList(list);
         mAdapter.notifyDataSetChanged();
     }
+
 
     /*
         Adapter Class for feeding the RecyclerView with ViewHolders from the list of entries.
