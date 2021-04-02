@@ -6,8 +6,12 @@
 package com.practice.journal;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
@@ -57,12 +61,47 @@ public class JournalListFragment extends Fragment {
     }
 
 
+    /**
+     * This method inflates the options menu.
+     * @param menu The options menu.
+     * @param inflater The layout inflater of the menu.
+     */
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_journal_list, menu);   // inflate the menu layout
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_new_entry:
+                // this menu option creates a new entry in the journal and launches
+                // a JournalActivity so that the new entry can be edited.
+
+                // create a new entry
+                Entry entry = new Entry();
+
+                // add the newly created entry to the list of entries
+                EntryStash.get(getContext()).getEntries().add(entry);
+
+                // launch the JournalActivity
+                Intent intent = JournalActivity.newIntent(getContext(), entry.getId());
+                startActivity(intent);
+
+                return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);   // default case when the menu item id does not match any known menu item
+    }
 
     /*
-        Adapter Class for feeding the RecyclerView with ViewHolders from the list of entries.
-        This class creates the needed ViewHolder defined in JournalViewHolder and binds that
-        view to the Data from the List of Journal Entries, then it is shown by the RecyclerView.
-     */
+            Adapter Class for feeding the RecyclerView with ViewHolders from the list of entries.
+            This class creates the needed ViewHolder defined in JournalViewHolder and binds that
+            view to the Data from the List of Journal Entries, then it is shown by the RecyclerView.
+         */
     private class JournalAdapter extends RecyclerView.Adapter<JournalHolder> {
         private List<Entry> mList;
 
