@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class EntryStash {
     // the singleton instance of this class
@@ -59,12 +60,42 @@ public class EntryStash {
     }
 
 
-    public void updateEntry() {
+    /**
+     * Updates an entry in the list of journal entries.
+     * @param id The id of the Entry to be updated.
+     * @param entry The updated entry.
+     */
+    public void updateEntry(UUID id, Entry entry) {
         // TODO: implement update of an entry in the list of entries
     }
 
 
-    public void deleteEntry() {
+    /**
+     * Removes an entry in the list of journal entries.
+     * @param id The id of the Entry to be deleted.
+     */
+    public void deleteEntry(UUID id) {
         // TODO: implement deletion of an entry in the list of entries
+    }
+
+
+    /**
+     * Returns an entry from the list of journal entries.
+     * @param id The id of the entry to be retrieved.
+     * @return The matching Entry object or null if the id does not match any Entry.
+     */
+    public Entry getEntry(UUID id) {
+
+        // iterate over each Entry in the list
+        for(int i=0; i<mList.size(); i++) {
+            Entry e = mList.get(i);
+
+            // compare the given id to the ids in each Entry
+            if (e.getId().equals(id)) {
+                return e;
+            }
+        }
+
+        return null;
     }
 }
