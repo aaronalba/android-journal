@@ -174,6 +174,7 @@ public class JournalListFragment extends Fragment {
         private TextView mDateTextView;
         private ImageButton mEditButton;
         private ImageButton mDeleteButton;
+        private Entry mEntry;
 
 
         public JournalHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -212,8 +213,9 @@ public class JournalListFragment extends Fragment {
 
         // This method is called by the adapter to fill the data in this ViewHolder
         public void bind(Entry entry) {
-            mTitleTextView.setText(entry.getTitle());
-            mDateTextView.setText(entry.getDate().toString());
+            mEntry = entry;
+            mTitleTextView.setText(mEntry.getTitle());
+            mDateTextView.setText(mEntry.getDate().toString());
         }
 
         // Method to be called when the edit button is clicked
