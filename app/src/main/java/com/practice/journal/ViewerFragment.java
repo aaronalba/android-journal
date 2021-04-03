@@ -71,12 +71,12 @@ public class ViewerFragment extends Fragment {
 
         Toast.makeText(getContext(), mEntry.getTitle(), Toast.LENGTH_SHORT).show();
 
-        // get the references to the Views in the layout
+        // get the references to the Views in the layout and set its values
         titleTextField = view.findViewById(R.id.title_viewer);
         titleTextField.setText(mEntry.getTitle());
 
         dateTimeTextField = view.findViewById(R.id.datetime_viewer);
-        dateTimeTextField.setText(mEntry.getDate().toString());
+        dateTimeTextField.setText(JournalUtil.formatDate(mEntry.getDate(), false));
 
         contentTextField = view.findViewById(R.id.content_viewer);
         contentTextField.setText(mEntry.getContent());
