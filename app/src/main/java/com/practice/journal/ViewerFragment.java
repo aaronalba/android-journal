@@ -21,12 +21,19 @@ public class ViewerFragment extends Fragment {
     private TextView titleTextField;
     private TextView dateTimeTextField;
     private TextView contentTextField;
+    private Entry mEntry;
 
     private static final String ARGS_ENTRY_ID = "uuid";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // retrieve the Entry id from the fragment argument
+        UUID id = (UUID) getArguments().getSerializable(ARGS_ENTRY_ID);
+
+        // get the Entry using the UUID
+        mEntry = EntryStash.get(getContext()).getEntry(id);
     }
 
 
