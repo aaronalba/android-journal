@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,7 +22,7 @@ import java.util.UUID;
 public class JournalFragment extends Fragment {
     private EditText mTitleField;
     private EditText mDateField;
-    private ImageButton mDateButton;
+    private EditText mTimeField;
     private EditText mContentField;
     private Entry mEntry;
 
@@ -95,7 +94,8 @@ public class JournalFragment extends Fragment {
         mDateField = view.findViewById(R.id.date_field);
         mDateField.setText(mEntry.getDate().toString());  // set the date field from the Entry
 
-//        mDateButton = view.findViewById(R.id.date_button);
+        mTimeField = view.findViewById(R.id.time_field);
+
 
         mContentField = view.findViewById(R.id.content_field);
         mContentField.setText(mEntry.getContent()); // set the content field
