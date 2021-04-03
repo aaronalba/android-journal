@@ -9,6 +9,10 @@ import androidx.fragment.app.Fragment;
 
 public class JournalListActivity extends SingleFragmentActivity {
 
+    /**
+     * Defines the fragment that will be hosted by this activity.
+     * @return The Fragment to be hosted.
+     */
     @Override
     protected Fragment createFragment() {
         return new JournalListFragment();
