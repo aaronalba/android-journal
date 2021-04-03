@@ -75,7 +75,14 @@ public class EntryStash {
      * @param id The id of the Entry to be deleted.
      */
     public void deleteEntry(UUID id) {
-        // TODO: implement deletion of an entry in the list of entries
+        // find the index of the Entry to be removed
+        for(int i=0; i<mList.size(); i++) {
+            // iterate over each Entry in the list
+            Entry e = mList.get(i);
+            if (e.getId().equals(id)) {
+                mList.remove(i);    // remove the entry with the matching id
+            }
+        }
     }
 
 
@@ -85,7 +92,6 @@ public class EntryStash {
      * @return The matching Entry object or null if the id does not match any Entry.
      */
     public Entry getEntry(UUID id) {
-
         // iterate over each Entry in the list
         for(int i=0; i<mList.size(); i++) {
             Entry e = mList.get(i);
