@@ -95,7 +95,7 @@ public class JournalFragment extends Fragment {
         mDateField = view.findViewById(R.id.date_field);
         mDateField.setText(mEntry.getDate().toString());  // set the date field from the Entry
 
-        mDateButton = view.findViewById(R.id.date_button);
+//        mDateButton = view.findViewById(R.id.date_button);
 
         mContentField = view.findViewById(R.id.content_field);
         mContentField.setText(mEntry.getContent()); // set the content field
