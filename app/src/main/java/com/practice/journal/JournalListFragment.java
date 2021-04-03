@@ -242,7 +242,7 @@ public class JournalListFragment extends Fragment {
         // Method to be called when this view holder is clicked
         public void onViewHolderClick(View v) {
             // This method will launch the ViewerActivity for previewing an entry
-            Intent intent = ViewerActivity.newIntent(mEntry.getId());
+            Intent intent = ViewerActivity.newIntent(getContext(), mEntry.getId());
             startActivity(intent);
         }
     }

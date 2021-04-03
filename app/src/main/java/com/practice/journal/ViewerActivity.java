@@ -5,6 +5,7 @@
 
 package com.practice.journal;
 
+import android.content.Context;
 import android.content.Intent;
 
 import androidx.fragment.app.Fragment;
@@ -29,11 +30,12 @@ public class ViewerActivity extends SingleFragmentActivity {
 
     /**
      * Creates a new intent for launching this activity.
+     * @param packageContext The activity that will start this ViewerActivity.
      * @param id The intent extra which contains the UUID of the Entry that will be previewed.
      * @return Intent object for starting this activity.
      */
-    public static Intent newIntent(UUID id) {
-        Intent intent = new Intent();
+    public static Intent newIntent(Context packageContext, UUID id) {
+        Intent intent = new Intent(packageContext, ViewerActivity.class);
         intent.putExtra(EXTRA_ENTRY_ID, id);
         return intent;
     }
