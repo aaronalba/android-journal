@@ -32,7 +32,7 @@ public class ViewerActivity extends SingleFragmentActivity {
      * @param id The intent extra which contains the UUID of the Entry that will be previewed.
      * @return Intent object for starting this activity.
      */
-    public Intent newIntent(UUID id) {
+    public static Intent newIntent(UUID id) {
         Intent intent = new Intent();
         intent.putExtra(EXTRA_ENTRY_ID, id);
         return intent;
