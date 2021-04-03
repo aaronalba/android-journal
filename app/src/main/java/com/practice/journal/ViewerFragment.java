@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -68,11 +69,18 @@ public class ViewerFragment extends Fragment {
         // inflate the layout
         View view = inflater.inflate(R.layout.fragment_viewer, container, false);
 
+        Toast.makeText(getContext(), mEntry.getTitle(), Toast.LENGTH_SHORT).show();
+
         // get the references to the Views in the layout
         titleTextField = view.findViewById(R.id.title_viewer);
-        dateTimeTextField = view.findViewById(R.id.datetime_viewer);
-        contentTextField = view.findViewById(R.id.content_viewer);
+        titleTextField.setText(mEntry.getTitle());
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        dateTimeTextField = view.findViewById(R.id.datetime_viewer);
+        dateTimeTextField.setText(mEntry.getDate().toString());
+
+        contentTextField = view.findViewById(R.id.content_viewer);
+        contentTextField.setText(mEntry.getContent());
+
+        return view;
     }
 }
