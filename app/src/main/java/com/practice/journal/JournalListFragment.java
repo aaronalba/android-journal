@@ -241,9 +241,9 @@ public class JournalListFragment extends Fragment {
 
         // Method to be called when this view holder is clicked
         public void onViewHolderClick(View v) {
-            // TODO: Implement onViewHolderClick method
-            // This method will launch the JournalViewerActivity
-            Toast.makeText(getContext(), "View this Entry", Toast.LENGTH_SHORT).show();
+            // This method will launch the ViewerActivity for previewing an entry
+            Intent intent = ViewerActivity.newIntent(mEntry.getId());
+            startActivity(intent);
         }
     }
 }
