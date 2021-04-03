@@ -229,9 +229,14 @@ public class JournalListFragment extends Fragment {
 
         // Method to be called when the delete button is clicked
         public void onDeleteClicked(View v) {
-            // TODO: Implement onDeleteClicked method
-            // This method will delete the Entry in the List of Entries
-            Toast.makeText(getContext(), "Delete this Entry", Toast.LENGTH_SHORT).show();
+            // This deletes an Entry that was clicked
+            EntryStash.get(getContext()).deleteEntry(mEntry.getId());
+
+            // Shows a message telling that the entry was deleted
+            Toast.makeText(getContext(), getString(R.string.toast_entry_delete), Toast.LENGTH_SHORT).show();
+
+            // update the recycler views list of items
+            updateUI();
         }
 
         // Method to be called when this view holder is clicked
