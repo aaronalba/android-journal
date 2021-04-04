@@ -53,15 +53,31 @@ public class EntryStash {
 
 
     /**
-     * Returns the list of journal entries.
-     * @return List
+     * Returns the list of journal entries to be used by the RecyclerView for listing the Entries
+     * @return List of entries
      */
     public List<Entry> getEntries() {
+        // create the list the will hold the Entry objects
         List<Entry> list = new ArrayList<>();
 
-      
+        // SELECT all of the rows in the database by passing null to the whereClause
+        EntryCursorWrapper cursor = queryEntries(null, null);
 
-        return new ArrayList<>();
+        try {
+            // move the cursor to the first entry
+            cursor.moveToFirst();
+
+            // iterate over each entry
+            while(!cursor.isAfterLast()) {
+                list.add(cursor.getEntry()); // add the Entry to the list
+
+                cursor.moveToNext();    // move to the next entry
+            }
+        } finally {
+            cursor.close();
+        }
+
+        return list;
     }
 
 
