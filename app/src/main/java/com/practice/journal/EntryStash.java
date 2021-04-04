@@ -56,7 +56,7 @@ public class EntryStash {
     public List<Entry> getEntries() {
         // TODO: update the implementation to use mDatabase
 //        return mList;
-        return null;
+        return new ArrayList<>();
     }
 
 

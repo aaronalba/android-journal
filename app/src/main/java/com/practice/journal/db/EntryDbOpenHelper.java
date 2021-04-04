@@ -9,6 +9,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.practice.journal.Entry;
 import com.practice.journal.db.EntryDbSchema.EntryTable;
 
 public class EntryDbOpenHelper extends SQLiteOpenHelper {
@@ -30,7 +31,7 @@ public class EntryDbOpenHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + DATABASE_NAME + "("
+        db.execSQL("CREATE TABLE " + EntryTable.NAME + "("
                 + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + EntryTable.COLS.UUID + ", "
                 + EntryTable.COLS.TITLE + ", "
