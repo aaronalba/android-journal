@@ -119,4 +119,28 @@ public class EntryStash {
 //
 //        return null;
     }
+
+
+    /*
+        Returns a content values object containing the data from the given Entry object. This is
+        used in database operations since the methods there requires a content value to pass in the
+        data that needs to be written to the tables.
+
+        @param entry The Entry object that contains journal data.
+        @return The created Content Value from the given Entry.
+     */
+    private static ContentValues getContentValues(Entry entry) {
+        // create the content values
+        ContentValues values = new ContentValues();
+
+        // insert data to the content values
+        values.put(EntryTable.COLS.TITLE, entry.getTitle());
+        values.put(EntryTable.COLS.UUID, entry.getId().toString());
+        values.put(EntryTable.COLS.DATE, entry.getDate().getTime());
+        values.put(EntryTable.COLS.CONTENT, entry.getContent());
+
+        return values;
+    }
+
+
 }
