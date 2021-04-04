@@ -99,7 +99,7 @@ public class JournalListFragment extends Fragment {
                 Entry entry = new Entry();
 
                 // add the newly created entry to the list of entries
-                EntryStash.get(getContext()).getEntries().add(entry);
+                EntryStash.get(getContext()).addEntry(entry);
 
                 // launch the JournalActivity
                 Intent intent = JournalActivity.newIntent(getContext(), entry.getId());
