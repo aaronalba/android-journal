@@ -124,10 +124,9 @@ public class EntryStash {
         String uuidString = id.toString();
 
         // query the database
-        Cursor cursor = queryEntries(EntryTable.COLS.UUID + " = ?", new String[] { uuidString });
-        // wrap the cursor
-        EntryCursorWrapper cursorWrapper = new EntryCursorWrapper((cursor));
+        EntryCursorWrapper cursorWrapper = queryEntries(EntryTable.COLS.UUID + " = ?", new String[] { uuidString });
 
+        // check if the cursor has some items
         if (cursorWrapper.getCount() == 0) {
             return null;
         }
@@ -138,8 +137,8 @@ public class EntryStash {
             cursorWrapper.moveToFirst();
             // return the Entry object
             return cursorWrapper.getEntry();
+
         } finally {
-            cursor.close();
             cursorWrapper.close();
         }
 
@@ -174,7 +173,7 @@ public class EntryStash {
         @param whereArgs Argument string for the whereClause
         @return The cursor containing the selected rows.
      */
-    private Cursor queryEntries(String whereClause, String[] whereArgs) {
+    private EntryCursorWrapper queryEntries(String whereClause, String[] whereArgs) {
         Cursor cursor = mDatabase.query(
                 EntryTable.NAME,
                 null,
@@ -185,6 +184,6 @@ public class EntryStash {
                 null
         );
 
-        return cursor;
+        return new EntryCursorWrapper(cursor);
     }
 }
