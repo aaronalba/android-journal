@@ -100,15 +100,13 @@ public class EntryStash {
      */
     public void deleteEntry(UUID id) {
         // TODO: update the implementation to use mDatabase
-//
-//        // find the index of the Entry to be removed
-//        for(int i=0; i<mList.size(); i++) {
-//            // iterate over each Entry in the list
-//            Entry e = mList.get(i);
-//            if (e.getId().equals(id)) {
-//                mList.remove(i);    // remove the entry with the matching id
-//            }
-//        }
+        // get the id of the entry to be deleted
+        String uuidString = id.toString();
+
+        // run the delete operation on the database
+        mDatabase.delete(EntryTable.NAME,
+                EntryTable.COLS.UUID + " = ?",
+                new String[] { uuidString });
     }
 
 
