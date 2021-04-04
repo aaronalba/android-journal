@@ -14,6 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.NonNull;
 
+import com.practice.journal.db.EntryCursorWrapper;
 import com.practice.journal.db.EntryDbOpenHelper;
 import com.practice.journal.db.EntryDbSchema;
 import com.practice.journal.db.EntryDbSchema.EntryTable;
@@ -56,8 +57,10 @@ public class EntryStash {
      * @return List
      */
     public List<Entry> getEntries() {
-        // TODO: update the implementation to use mDatabase
-//        return mList;
+        List<Entry> list = new ArrayList<>();
+
+      
+
         return new ArrayList<>();
     }
 
@@ -122,26 +125,24 @@ public class EntryStash {
 
         // query the database
         Cursor cursor = queryEntries(EntryTable.COLS.UUID + " = ?", new String[] { uuidString });
+        // wrap the cursor
+        EntryCursorWrapper cursorWrapper = new EntryCursorWrapper((cursor));
 
-        // get the column indices of the data in the Cursor
-        int titleColumn = cursor.getColumnIndex(EntryTable.COLS.TITLE);
-        int uuidColumn = cursor.getColumnIndex(EntryTable.COLS.UUID);
-        int dateColumn = cursor.getColumnIndex(EntryTable.COLS.DATE);
-        int contentColumn = cursor.getColumnIndex(EntryTable.COLS.CONTENT);
+        if (cursorWrapper.getCount() == 0) {
+            return null;
+        }
 
-        // get the values from the cursor using the column indices
-        String titleData = cursor.getString(titleColumn);
-        String uuidData = cursor.getString(uuidColumn);
-        long dateData = cursor.getLong(dateColumn);
-        String contentData = cursor.getString(contentColumn);
+        // move the cursor to the first item
+        try {
+            // move the cursor to the first entry that matched, which is the only entry in this cursor
+            cursorWrapper.moveToFirst();
+            // return the Entry object
+            return cursorWrapper.getEntry();
+        } finally {
+            cursor.close();
+            cursorWrapper.close();
+        }
 
-        // create the entry
-        Entry entry = new Entry(uuidData);
-        entry.setTitle(titleData);
-        entry.setDate(new Date(dateData));
-        entry.setContent(contentData);
-
-        return entry;
     }
 
 
