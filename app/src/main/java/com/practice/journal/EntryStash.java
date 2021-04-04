@@ -9,6 +9,7 @@ package com.practice.journal;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.NonNull;
@@ -129,7 +130,7 @@ public class EntryStash {
 //            }
 //        }
 //
-//        return null;
+//        return null;:
     }
 
 
@@ -155,4 +156,23 @@ public class EntryStash {
     }
 
 
+    /*
+        This method returns the cursor pointing to the selected database entry
+        @param whereClause Tells which row of the Table will be returned
+        @param whereArgs Argument string for the whereClause
+        @return The cursor containing the selected rows.
+     */
+    private Cursor queryEntries(String whereClause, String[] whereArgs) {
+        Cursor cursor = mDatabase.query(
+                EntryTable.NAME,
+                null,
+                whereClause,
+                whereArgs,
+                null,
+                null,
+                null
+        );
+
+        return cursor;
+    }
 }
