@@ -62,11 +62,14 @@ public class EntryStash {
 
     /**
      * Adds an entry to the list of journal entries.
-     * @param entry The entry to be added to the list.
+     * @param entry The entry to be added to the database.
      */
     public void addEntry(Entry entry) {
-        // TODO: update the implementation to use mDatabase
-//        this.mList.add(entry);
+        // create the content values from the given entry
+        ContentValues data = getContentValues(entry);
+
+        // insert data to the database
+        mDatabase.insert(EntryTable.NAME, null, data);
     }
 
 
