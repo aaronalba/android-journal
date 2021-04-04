@@ -79,7 +79,18 @@ public class EntryStash {
      * @param entry The updated entry.
      */
     public void updateEntry(UUID id, Entry entry) {
-        // TODO: implement update of an entry in the list of entries
+        // get the uuid of the entry
+        String uuidString = entry.getId().toString();
+
+        // create the content values which will be passed to the update statement
+        ContentValues data = getContentValues(entry);
+
+        // update the data on the database
+        mDatabase.update(
+                EntryTable.NAME,
+                data,
+                EntryTable.COLS.UUID + "= ? ",
+                new String[] { uuidString });
     }
 
 
