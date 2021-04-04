@@ -42,6 +42,17 @@ public class Entry {
     }
 
 
+    /**
+     * This constructor creates a new Entry using a given UUID. This is used for recreating an entry
+     * that is retrieved from a database.
+     * @param uuidString The string representation of the UUID
+     */
+    public Entry(String uuidString) {
+        this.mId = UUID.fromString(uuidString);
+        this.mDate = new Date();
+    }
+
+
 
 
     /**
