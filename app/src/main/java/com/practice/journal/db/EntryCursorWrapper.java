@@ -10,6 +10,7 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 
 import com.practice.journal.Entry;
+import com.practice.journal.db.EntryDbSchema.EntryTable;
 
 import java.util.Date;
 
@@ -29,17 +30,11 @@ public class EntryCursorWrapper extends CursorWrapper {
      * @return The Entry object from the cursor.
      */
     public Entry getEntry() {
-        // get the column indices of the data in the Cursor
-        int titleColumn = this.getColumnIndex(EntryDbSchema.EntryTable.COLS.TITLE);
-        int uuidColumn = this.getColumnIndex(EntryDbSchema.EntryTable.COLS.UUID);
-        int dateColumn = this.getColumnIndex(EntryDbSchema.EntryTable.COLS.DATE);
-        int contentColumn = this.getColumnIndex(EntryDbSchema.EntryTable.COLS.CONTENT);
-
         // get the values from the cursor using the column indices
-        String titleData = this.getString(titleColumn);
-        String uuidData = this.getString(uuidColumn);
-        long dateData = this.getLong(dateColumn);
-        String contentData = this.getString(contentColumn);
+        String titleData = getString(getColumnIndex(EntryTable.COLS.TITLE));
+        String uuidData = getString(getColumnIndex(EntryTable.COLS.UUID));
+        long dateData = getLong(getColumnIndex(EntryTable.COLS.DATE));
+        String contentData = getString(getColumnIndex(EntryTable.COLS.CONTENT));
 
         // create the entry
         Entry entry = new Entry(uuidData);
