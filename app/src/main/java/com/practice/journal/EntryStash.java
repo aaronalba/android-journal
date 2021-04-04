@@ -19,6 +19,7 @@ import com.practice.journal.db.EntryDbSchema;
 import com.practice.journal.db.EntryDbSchema.EntryTable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -62,7 +63,7 @@ public class EntryStash {
 
 
     /**
-     * Adds an entry to the list of journal entries.
+     * Adds an entry to the database of journal entries.
      * @param entry The entry to be added to the database.
      */
     public void addEntry(Entry entry) {
@@ -75,9 +76,9 @@ public class EntryStash {
 
 
     /**
-     * Updates an entry in the list of journal entries.
+     * Updates an entry in the database of journal entries.
      * @param id The id of the Entry to be updated.
-     * @param entry The updated entry.
+     * @param entry The entry containing the updated data
      */
     public void updateEntry(UUID id, Entry entry) {
         // get the uuid of the entry
@@ -96,11 +97,10 @@ public class EntryStash {
 
 
     /**
-     * Removes an entry in the list of journal entries.
+     * Removes an entry in the database of journal entries.
      * @param id The id of the Entry to be deleted.
      */
     public void deleteEntry(UUID id) {
-        // TODO: update the implementation to use mDatabase
         // get the id of the entry to be deleted
         String uuidString = id.toString();
 
@@ -112,25 +112,36 @@ public class EntryStash {
 
 
     /**
-     * Returns an entry from the list of journal entries.
+     * Returns an entry from the database of journal entries.
      * @param id The id of the entry to be retrieved.
-     * @return The matching Entry object or null if the id does not match any Entry.
+     * @return The matching Entry object.
      */
     public Entry getEntry(UUID id) {
-        // TODO: update the implementation to use mDatabase
-        return null;
+        // convert uuid to string
+        String uuidString = id.toString();
 
-//        // iterate over each Entry in the list
-//        for(int i=0; i<mList.size(); i++) {
-//            Entry e = mList.get(i);
-//
-//            // compare the given id to the ids in each Entry
-//            if (e.getId().equals(id)) {
-//                return e;
-//            }
-//        }
-//
-//        return null;:
+        // query the database
+        Cursor cursor = queryEntries(EntryTable.COLS.UUID + " = ?", new String[] { uuidString });
+
+        // get the column indices of the data in the Cursor
+        int titleColumn = cursor.getColumnIndex(EntryTable.COLS.TITLE);
+        int uuidColumn = cursor.getColumnIndex(EntryTable.COLS.UUID);
+        int dateColumn = cursor.getColumnIndex(EntryTable.COLS.DATE);
+        int contentColumn = cursor.getColumnIndex(EntryTable.COLS.CONTENT);
+
+        // get the values from the cursor using the column indices
+        String titleData = cursor.getString(titleColumn);
+        String uuidData = cursor.getString(uuidColumn);
+        long dateData = cursor.getLong(dateColumn);
+        String contentData = cursor.getString(contentColumn);
+
+        // create the entry
+        Entry entry = new Entry(uuidData);
+        entry.setTitle(titleData);
+        entry.setDate(new Date(dateData));
+        entry.setContent(contentData);
+
+        return entry;
     }
 
 
