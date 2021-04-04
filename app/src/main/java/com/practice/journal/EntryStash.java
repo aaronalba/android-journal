@@ -7,9 +7,15 @@
 
 package com.practice.journal;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 
 import androidx.annotation.NonNull;
+
+import com.practice.journal.db.EntryDbOpenHelper;
+import com.practice.journal.db.EntryDbSchema;
+import com.practice.journal.db.EntryDbSchema.EntryTable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,13 +25,14 @@ public class EntryStash {
     // the singleton instance of this class
     private static EntryStash sEntryStash;
 
-    // the list containing entries
-    private List<Entry> mList;
+    // the database that stores the entries
+    private SQLiteDatabase mDatabase;
 
 
     // Private constructor to avoid instantiating objects from this class
     private EntryStash(Context context) {
-        mList = new ArrayList<>();
+        // create or open the database using the EntryDbOpenHelper class
+        mDatabase = new EntryDbOpenHelper(context).getWritableDatabase();
     }
 
 
@@ -47,7 +54,9 @@ public class EntryStash {
      * @return List
      */
     public List<Entry> getEntries() {
-        return mList;
+        // TODO: update the implementation to use mDatabase
+//        return mList;
+        return null;
     }
 
 
@@ -56,7 +65,8 @@ public class EntryStash {
      * @param entry The entry to be added to the list.
      */
     public void addEntry(Entry entry) {
-        this.mList.add(entry);
+        // TODO: update the implementation to use mDatabase
+//        this.mList.add(entry);
     }
 
 
@@ -75,14 +85,16 @@ public class EntryStash {
      * @param id The id of the Entry to be deleted.
      */
     public void deleteEntry(UUID id) {
-        // find the index of the Entry to be removed
-        for(int i=0; i<mList.size(); i++) {
-            // iterate over each Entry in the list
-            Entry e = mList.get(i);
-            if (e.getId().equals(id)) {
-                mList.remove(i);    // remove the entry with the matching id
-            }
-        }
+        // TODO: update the implementation to use mDatabase
+//
+//        // find the index of the Entry to be removed
+//        for(int i=0; i<mList.size(); i++) {
+//            // iterate over each Entry in the list
+//            Entry e = mList.get(i);
+//            if (e.getId().equals(id)) {
+//                mList.remove(i);    // remove the entry with the matching id
+//            }
+//        }
     }
 
 
@@ -92,16 +104,19 @@ public class EntryStash {
      * @return The matching Entry object or null if the id does not match any Entry.
      */
     public Entry getEntry(UUID id) {
-        // iterate over each Entry in the list
-        for(int i=0; i<mList.size(); i++) {
-            Entry e = mList.get(i);
-
-            // compare the given id to the ids in each Entry
-            if (e.getId().equals(id)) {
-                return e;
-            }
-        }
-
+        // TODO: update the implementation to use mDatabase
         return null;
+
+//        // iterate over each Entry in the list
+//        for(int i=0; i<mList.size(); i++) {
+//            Entry e = mList.get(i);
+//
+//            // compare the given id to the ids in each Entry
+//            if (e.getId().equals(id)) {
+//                return e;
+//            }
+//        }
+//
+//        return null;
     }
 }
