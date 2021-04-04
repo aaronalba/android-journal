@@ -114,4 +114,17 @@ public class JournalFragment extends Fragment {
 
         return view;
     }
+
+
+    /**
+     * This lifecycle method is called when the Fragment is removed from the viewable screen of the user.
+     * When the user navigates back to the List showing the Entries on JournalListFragment, this method will
+     * be called and it is saves the changes that the user made to the Entry object that is currently being
+     * edited.
+     */
+    @Override
+    public void onPause() {
+        super.onPause();
+        EntryStash.get(getContext()).updateEntry(mEntry.getId(), mEntry);    // update the entry
+    }
 }
