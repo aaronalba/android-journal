@@ -11,18 +11,20 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import java.util.UUID;
 
 public class JournalFragment extends Fragment {
     private EditText mTitleField;
-    private EditText mDateField;
-    private EditText mTimeField;
+    private Button mDateField;
+    private Button mTimeField;
     private EditText mContentField;
     private Entry mEntry;
 
@@ -76,6 +78,8 @@ public class JournalFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_journal, container, false);
 
         // get references to the views in the layout
+
+        // The TitleTextField
         mTitleField = view.findViewById(R.id.title_field);
         mTitleField.setText(mEntry.getTitle()); // set the title field from the Entry
         mTitleField.addTextChangedListener(new TextWatcher() {
@@ -91,12 +95,18 @@ public class JournalFragment extends Fragment {
             public void afterTextChanged(Editable s) {}
         });
 
+
+
+        // The DateField
         mDateField = view.findViewById(R.id.date_field);
         mDateField.setText(mEntry.getDate().toString());  // set the date field from the Entry
 
+
+        // The TimeField
         mTimeField = view.findViewById(R.id.time_field);
 
 
+        // The ContentField
         mContentField = view.findViewById(R.id.content_field);
         mContentField.setText(mEntry.getContent()); // set the content field
         mContentField.addTextChangedListener(new TextWatcher() {
@@ -126,5 +136,12 @@ public class JournalFragment extends Fragment {
     public void onPause() {
         super.onPause();
         EntryStash.get(getContext()).updateEntry(mEntry.getId(), mEntry);    // update the entry
+    }
+
+
+
+
+    public void onDateFieldClicked() {
+
     }
 }
