@@ -7,6 +7,7 @@ package com.practice.journal;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -39,8 +40,10 @@ public class JournalFragment extends Fragment {
     private static final String ARG_ENTRY_ID = "uuid";
 
     private static final int REQUEST_DATE = 1;
+    private static final int REQUEST_TIME = 2;
 
     private static final String TAG_DIALOG_DATE = "tag_date";
+    private static final String TAG_DIALOG_TIME = "tag_time";
 
 
 
@@ -115,7 +118,7 @@ public class JournalFragment extends Fragment {
         mDateField.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // create the dialog fragment
+                // create the date picker fragment
                 DatePickerFragment dialog = DatePickerFragment.newInstance(mEntry.getDate());
 
                 // set JournalFragment as the target fragment of the DatePickerFragment so that the result can be sent back
@@ -129,6 +132,20 @@ public class JournalFragment extends Fragment {
 
         // The TimeField
         mTimeField = view.findViewById(R.id.time_field);
+        updateTimeText();
+        mTimeField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // create the time picker fragment
+                TimePickerFragment dialog = TimePickerFragment.newInstance(mEntry.getDate());
+
+                // set JournalFragment as the target fragment of the DatePickerFragment so that the result can be sent back
+                dialog.setTargetFragment(JournalFragment.this, REQUEST_TIME);
+
+                // start the dialog fragment
+                dialog.show(getFragmentManager(), TAG_DIALOG_TIME);
+            }
+        });
 
 
         // The ContentField
@@ -198,19 +215,59 @@ public class JournalFragment extends Fragment {
 
             // update the date text in the UI
             updateDateText();
+
+        } else if (requestCode == REQUEST_TIME) {
+
+            // the Date result containing the chosen time from TimePickerFragment
+            Date res = (Date) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
+
+            // get the year, month and day of the current date in the Entry
+            Calendar date_current = Calendar.getInstance();
+            date_current.setTime(mEntry.getDate());
+            int year = date_current.get(Calendar.YEAR);
+            int month = date_current.get(Calendar.MONTH);
+            int day = date_current.get(Calendar.DAY_OF_MONTH);
+
+            // get the hour and minute from the resulting date
+            Calendar date_res = Calendar.getInstance();
+            date_res.setTime(res);
+            int hour = date_res.get(Calendar.HOUR);
+            int minute = date_res.get(Calendar.MINUTE);
+
+            // create the final date
+            GregorianCalendar date = new GregorianCalendar(year,month,day,hour,minute);
+
+            // update the date object of the Entry
+            mEntry.setDate(date.getTime());
+
+            // update the time shown in the UI
+            updateTimeText();
         }
     }
 
 
 
     /*
-        This method rewrites the text on the DateField View
+        This method rewrites the text on the DateField View.
      */
     private void updateDateText() {
         // create the date string to be shown
         String dateString = JournalUtil.formatDate(mEntry.getDate());
 
-        // set the date field from the Entry
+        // set the date field
         mDateField.setText(dateString);
+    }
+
+
+
+    /*
+        This method rewrites the text on the DateField View.
+     */
+    private void updateTimeText() {
+        // create the time string to be shown in the TimeField Button
+        String timeString = JournalUtil.formatTime(mEntry.getDate(), false);
+
+        // set the time field
+        mTimeField.setText(timeString);
     }
 }
