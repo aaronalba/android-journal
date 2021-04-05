@@ -65,7 +65,7 @@ public class PromptDialogFragment extends DialogFragment {
      * Method used to send back the result of this prompt back to the caller using the Target Fragment
      * @param value The result of the prompt.
      */
-    private void sendResult(boolean value) {
+    protected void sendResult(boolean value) {
         // create the intent that will hold the result
         Intent intent = new Intent();
         intent.putExtra(EXTRA_PROMPT, value);
