@@ -46,34 +46,36 @@
         app:layout_constraintStart_toStartOf="@+id/time_field"
         app:layout_constraintTop_toBottomOf="@+id/title_field" />
 
-    :<EditText
+    <Button
         android:id="@+id/date_field"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="date"
+        android:textSize="18sp"
+        tools:text="05 Apr 2021"
+        style="@style/Widget.AppCompat.Button.Colored"
         app:layout_constraintEnd_toStartOf="@+id/time_field"
         app:layout_constraintHorizontal_bias=".5"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintHorizontal_weight="2
+        app:layout_constraintHorizontal_weight="3
 "
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/label_date" />
 
-    <EditText
+    <Button
         android:id="@+id/time_field"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:inputType="date"
+        android:textSize="19sp"
+        tools:text="10:51 am"
+        style="@style/Widget.AppCompat.Button.Colored"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintHorizontal_weight="2"
         app:layout_constraintStart_toEndOf="@+id/date_field"
         app:layout_constraintTop_toBottomOf="@+id/label_date" />
 
