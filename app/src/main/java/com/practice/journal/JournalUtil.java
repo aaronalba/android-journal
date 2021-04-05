@@ -14,10 +14,10 @@ public final class JournalUtil {
 
 
     /**
-     * Applies a format to a Date object and returns the string date.
+     * Applies a format to a Date object and returns the string date time.
      * @param date The Date object to be formatted.
      * @param isMilitaryTime Tells whether the format should be in military time or am-pm time.
-     * @return The String containing the formatted date.
+     * @return The String containing the formatted date time.
      */
     public static String formatDateTime(Date date, boolean isMilitaryTime) {
         // create the formatter
@@ -30,6 +30,21 @@ public final class JournalUtil {
         // format the date
         return format.format(date);
     }
+
+
+    /**
+     * Applies a format to a Date object and returns the string date.
+     * @param date The Date object to be formatted.
+     * @return The String containing the formatted date.
+     */
+    public static String formatDate(Date date) {
+        // create the formatter
+        SimpleDateFormat format = new SimpleDateFormat("E dd MMM yyyy");
+
+        // format the date
+        return format.format(date);
+    }
+
 
 
 }
