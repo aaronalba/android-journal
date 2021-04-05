@@ -177,7 +177,9 @@ public class JournalFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        EntryStash.get(getContext()).updateEntry(mEntry.getId(), mEntry);    // update the entry
+
+        // update the entry
+        syncDatabase();
     }
 
 
@@ -215,6 +217,7 @@ public class JournalFragment extends Fragment {
 
             // update the date text in the UI
             updateDateText();
+            syncDatabase();
 
         } else if (requestCode == REQUEST_TIME) {
 
@@ -242,6 +245,7 @@ public class JournalFragment extends Fragment {
 
             // update the time shown in the UI
             updateTimeText();
+            syncDatabase();
         }
     }
 
@@ -269,5 +273,14 @@ public class JournalFragment extends Fragment {
 
         // set the time field
         mTimeField.setText(timeString);
+    }
+
+
+    /*
+        This method updates the data modified in the Entry to the Database handled by EntryStash
+     */
+    private void syncDatabase() {
+        // update the entry in the database
+        EntryStash.get(getContext()).updateEntry(mEntry.getId(), mEntry);
     }
 }
