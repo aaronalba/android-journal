@@ -217,7 +217,10 @@ public class JournalListFragment extends Fragment {
         public void bind(Entry entry) {
             mEntry = entry;
             mTitleTextView.setText(mEntry.getTitle());
-            mDateTextView.setText(mEntry.getDate().toString());
+
+            // format the date string before showing to the list
+            String dateTimeString = JournalUtil.formatDateTime(mEntry.getDate(), false);
+            mDateTextView.setText(dateTimeString);
         }
 
         // Method to be called when the edit button is clicked
