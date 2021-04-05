@@ -53,6 +53,8 @@ public class TimePickerFragment extends DialogFragment implements TimePickerDial
 
         // Get the time date from the Date object
         Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+
         int hour = calendar.get(Calendar.HOUR);
         int minute = calendar.get(Calendar.MINUTE);
 
