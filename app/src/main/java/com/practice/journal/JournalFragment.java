@@ -5,9 +5,13 @@
 
 package com.practice.journal;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +20,13 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.UUID;
 
 public class JournalFragment extends Fragment {
@@ -29,6 +37,10 @@ public class JournalFragment extends Fragment {
     private Entry mEntry;
 
     private static final String ARG_ENTRY_ID = "uuid";
+
+    private static final int REQUEST_DATE = 1;
+
+    private static final String TAG_DIALOG_DATE = "tag_date";
 
 
 
@@ -99,7 +111,20 @@ public class JournalFragment extends Fragment {
 
         // The DateField
         mDateField = view.findViewById(R.id.date_field);
-        mDateField.setText(mEntry.getDate().toString());  // set the date field from the Entry
+        updateDateText();
+        mDateField.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // create the dialog fragment
+                DatePickerFragment dialog = DatePickerFragment.newInstance(mEntry.getDate());
+
+                // set JournalFragment as the target fragment of the DatePickerFragment so that the result can be sent back
+                dialog.setTargetFragment(JournalFragment.this, REQUEST_DATE);
+
+                // start the dialog fragment
+                dialog.show(getFragmentManager(), TAG_DIALOG_DATE);
+            }
+        });
 
 
         // The TimeField
@@ -139,9 +164,53 @@ public class JournalFragment extends Fragment {
     }
 
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        // check if the result code is OK
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        if (requestCode == REQUEST_DATE) {
+            // the result got from the DatePickerFragment
+            Date res = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
 
 
-    public void onDateFieldClicked() {
+            // get the year, month and day date from the retrieved date
+            Calendar date_result = Calendar.getInstance();
+            date_result.setTime(res);
+            int year = date_result.get(Calendar.YEAR);
+            int month = date_result.get(Calendar.MONTH);
+            int day = date_result.get(Calendar.DAY_OF_MONTH);
 
+            // get the time date from the current date
+            Calendar date_current = Calendar.getInstance();
+            date_current.setTime(mEntry.getDate());
+            int hour = date_current.get(Calendar.HOUR);
+            int minute = date_current.get(Calendar.MINUTE);
+            int sec = date_current.get(Calendar.SECOND);
+
+            // create the final date
+            GregorianCalendar date = new GregorianCalendar(year, month, day, hour, minute, sec);
+
+            // set the new date to the date object of the Entry
+            mEntry.setDate(date.getTime());
+
+            // update the date text in the UI
+            updateDateText();
+        }
+    }
+
+
+
+    /*
+        This method rewrites the text on the DateField View
+     */
+    private void updateDateText() {
+        // create the date string to be shown
+        String dateString = JournalUtil.formatDate(mEntry.getDate());
+
+        // set the date field from the Entry
+        mDateField.setText(dateString);
     }
 }
