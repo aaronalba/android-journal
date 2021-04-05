@@ -5,6 +5,7 @@
 
 package com.practice.journal;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,11 +25,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.xml.sax.HandlerBase;
+
 import java.util.List;
+import java.util.UUID;
 
 public class JournalListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private JournalAdapter mAdapter;
+
+    private static final int REQUEST_PROMPT_DELETE = 1;
+
+    private static final String TAG_PROMPT_DELETE = "tag_prompt_delete";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -178,7 +186,6 @@ public class JournalListFragment extends Fragment {
         private ImageButton mDeleteButton;
         private Entry mEntry;
 
-
         public JournalHolder(LayoutInflater inflater, ViewGroup parent) {
             // inflate the layout. The root view can be found in the ViewHolder member field named itemView
             super(inflater.inflate(R.layout.list_item_entry, parent, false));
@@ -232,14 +239,14 @@ public class JournalListFragment extends Fragment {
 
         // Method to be called when the delete button is clicked
         public void onDeleteClicked(View v) {
-            // This deletes an Entry that was clicked
-            EntryStash.get(getContext()).deleteEntry(mEntry.getId());
-
-            // Shows a message telling that the entry was deleted
-            Toast.makeText(getContext(), getString(R.string.toast_entry_delete), Toast.LENGTH_SHORT).show();
-
-            // update the recycler views list of items
-            updateUI();
+            // show a prompt to confirm delete operation
+            PromptDeleteEntryFragment dialog = new PromptDeleteEntryFragment(
+                    getString(R.string.prompt_delete_entry),
+                    getString(R.string.prompt_confirm),
+                    mEntry
+            );
+            dialog.setTargetFragment(JournalListFragment.this, REQUEST_PROMPT_DELETE);
+            dialog.show(getFragmentManager(), TAG_PROMPT_DELETE);
         }
 
         // Method to be called when this view holder is clicked
@@ -247,6 +254,33 @@ public class JournalListFragment extends Fragment {
             // This method will launch the ViewerActivity for previewing an entry
             Intent intent = ViewerActivity.newIntent(getContext(), mEntry.getId());
             startActivity(intent);
+        }
+    }
+
+
+
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        // check if the result is OK
+        if (resultCode != Activity.RESULT_OK) {
+            return;
+        }
+
+        if (requestCode == REQUEST_PROMPT_DELETE) {
+            // retrieve the boolean result from the dialog
+            boolean val = (boolean) data.getSerializableExtra(PromptDialogFragment.EXTRA_PROMPT);
+
+            // retrieve the Entry id from the dialog
+            String uuidString = (String) data.getSerializableExtra(PromptDeleteEntryFragment.EXTRA_PROMPT_ENTRYID);
+            UUID uuid = UUID.fromString(uuidString);
+
+            // if val is true delete the
+            if (val) {
+                EntryStash.get(getContext()).deleteEntry(uuid);
+                updateUI();
+            }
         }
     }
 }
