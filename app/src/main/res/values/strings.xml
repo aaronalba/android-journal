@@ -8,4 +8,6 @@
     <string name="new_entry">New Entry</string>
     <string name="toast_entry_delete">Entry has been deleted!</string>
     <string name="label_time">Time</string>
+    <string name="prompt_delete_entry">Delete entry?</string>
+    <string name="prompt_confirm">Confirm</string>
 </resources>

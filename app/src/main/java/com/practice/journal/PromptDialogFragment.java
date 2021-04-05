@@ -24,7 +24,8 @@ public class PromptDialogFragment extends DialogFragment {
     private String mPositiveButtonMessage;
 
     private static final String NEGATIVE_BTN_MSG = "Cancel";
-    private static final String EXTRA_PROMPT = "com.practice.journal.prompt";
+
+    public static final String EXTRA_PROMPT = "com.practice.journal.prompt";
 
     /**
      * Creates an Alert Dialog with the given message
