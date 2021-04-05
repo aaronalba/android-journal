@@ -76,7 +76,7 @@ public class ViewerFragment extends Fragment {
         titleTextField.setText(mEntry.getTitle());
 
         dateTimeTextField = view.findViewById(R.id.datetime_viewer);
-        dateTimeTextField.setText(JournalUtil.formatDate(mEntry.getDate(), false));
+        dateTimeTextField.setText(JournalUtil.formatDateTime(mEntry.getDate(), false));
 
         contentTextField = view.findViewById(R.id.content_viewer);
         contentTextField.setText(mEntry.getContent());
