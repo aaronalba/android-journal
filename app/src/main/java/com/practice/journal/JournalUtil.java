@@ -19,7 +19,7 @@ public final class JournalUtil {
      * @param isMilitaryTime Tells whether the format should be in military time or am-pm time.
      * @return The String containing the formatted date.
      */
-    public static String formatDate(Date date, boolean isMilitaryTime) {
+    public static String formatDateTime(Date date, boolean isMilitaryTime) {
         // create the formatter
         SimpleDateFormat format;
         if (isMilitaryTime) {
@@ -30,4 +30,6 @@ public final class JournalUtil {
         // format the date
         return format.format(date);
     }
+
+
 }
