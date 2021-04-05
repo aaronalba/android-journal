@@ -46,5 +46,20 @@ public final class JournalUtil {
     }
 
 
+    /**
+     * Applies a format to a Date object and returns the string time.
+     * @param date The Date object to be formatted.
+     * @return The string containing the time from the Date.
+     */
+    public static String formatTime(Date date, boolean isMilitaryTime) {
+        // create the formatter
+        SimpleDateFormat format;
+        if (isMilitaryTime) {
+            format = new SimpleDateFormat("HH:mm");
+        }
+        format = new SimpleDateFormat("hh:mm a");
 
+        // format the date
+        return format.format(date);
+    }
 }
