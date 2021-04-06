@@ -64,6 +64,12 @@ public class JournalListFragment extends Fragment {
         mNewEntryButton = view.findViewById(R.id.new_entry);
 
         // TODO: set listener to new entry button
+        mNewEntryButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newEntry(); // create new entry
+            }
+        });
 
 
 
@@ -117,15 +123,7 @@ public class JournalListFragment extends Fragment {
                 // this menu option creates a new entry in the journal and launches
                 // a JournalActivity so that the new entry can be edited.
 
-                // create a new entry
-                Entry entry = new Entry();
-
-                // add the newly created entry to the list of entries
-                EntryStash.get(getContext()).addEntry(entry);
-
-                // launch the JournalActivity
-                Intent intent = JournalActivity.newIntent(getContext(), entry.getId());
-                startActivity(intent);
+                newEntry();
 
                 return true;
         }
@@ -328,5 +326,21 @@ public class JournalListFragment extends Fragment {
             mFirstEntryView.setVisibility(View.GONE);
         }
 
+    }
+
+
+    /*
+        Creates a new Entry to be edited by the JournalActivity's fragment.
+     */
+    private void newEntry() {
+        // create a new entry
+        Entry entry = new Entry();
+
+        // add the newly created entry to the list of entries
+        EntryStash.get(getContext()).addEntry(entry);
+
+        // launch the JournalActivity
+        Intent intent = JournalActivity.newIntent(getContext(), entry.getId());
+        startActivity(intent);
     }
 }
