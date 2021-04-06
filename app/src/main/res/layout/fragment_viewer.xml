@@ -15,11 +15,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         tools:text="Title"
-
         android:textColor="@color/black"
-        android:textSize="18sp"
-        android:padding="8dp"
-
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -31,35 +28,46 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        tools:text="Sat Apr 3 2021 18:34"
-
-        android:textColor="@color/black"
-        android:paddingStart="8dp"
-
+        android:textColor="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_viewer" />
+        app:layout_constraintTop_toBottomOf="@+id/title_viewer"
+        tools:text="Sat Apr 3 2021 18:34" />
 
 
-    <ScrollView
+    <View
+        android:id="@+id/space"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="1dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="8dp"
+        android:background="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/datetime_viewer" />
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/datetime_viewer">
+        app:layout_constraintTop_toBottomOf="@+id/space">
 
         <TextView
             android:id="@+id/content_viewer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:textColor="@color/black"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
+            android:textSize="18sp"
+            tools:layout_editor_absoluteX="165dp"
+            tools:layout_editor_absoluteY="85dp"
             tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vitae velit convallis, accumsan mi condimentum, dignissim mi. Vestibulum eget eros eget metus suscipit finibus ut et tortor. Morbi ut egestas orci. Quisque vestibulum metus non urna dictum, nec porttitor mauris rhoncus. Nulla egestas quam vel urna commodo bibendum. Donec non libero varius, fermentum tellus vitae, iaculis massa. Praesent vel quam eu massa pellentesque lacinia ornare in lorem. Sed commodo porttitor lorem, a bibendum nunc maximus at. Sed sodales, elit et tristique maximus, metus nisl lobortis neque, nec dapibus enim nulla a tortor. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
 
 Pellentesque scelerisque massa tristique pretium posuere. Fusce eros magna, eleifend eget porttitor eget, aliquet non lacus. Sed rhoncus vel ante malesuada commodo. Aliquam sem odio, ultrices ut diam at, dapibus feugiat dui. Nulla vitae porta elit, at eleifend nisi. Pellentesque efficitur, ipsum nec scelerisque fermentum, risus dui finibus eros, id pharetra eros lectus et sapien. Aliquam lacus elit, fringilla vel dolor non, scelerisque sagittis lectus.
@@ -78,8 +86,7 @@ Pellentesque malesuada, augue ac porttitor varius, tellus justo egestas ipsum, v
 
 Donec tincidunt laoreet tortor, vel ullamcorper purus semper quis. Quisque vestibulum vulputate metus et euismod. Nunc non faucibus nisl. Ut at dignissim tortor, ut fringilla massa. Vestibulum nec nulla placerat, pharetra ex sit amet, euismod libero. Aliquam pharetra tristique volutpat. Ut tincidunt gravida placerat. Morbi non nibh mattis, vestibulum arcu ut, egestas nunc. Quisque sem sapien, aliquam sit amet elit egestas, rhoncus ultrices dolor. Proin dapibus cursus mollis. Etiam aliquet aliquet aliquet. Mauris vulputate lacus et tempor tempus. Aliquam ultrices porttitor lorem, a tincidunt urna. Maecenas viverra dui eu leo porta venenatis. Duis ligula mi, rutrum nec purus sed, pharetra suscipit dui.
 
-Aliquam felis orci, commodo ut pellentesque ac, rutrum vel augue. Donec vel diam elit. Integer non augue vitae magna sagittis aliquet. Nullam id suscipit eros. Suspendisse molestie porta augue, vel fringilla dui scelerisque vulputate. Pellentesque finibus pharetra sem. Praesent porttitor suscipit quam, sit amet fringilla lectus iaculis quis. Ut eu mauris et lorem commodo ullamcorper at non elit. Praesent interdum et leo a mattis. Mauris hendrerit eu urna et porttitor. Etiam mollis aliquam dolor in facilisis."
-            tools:layout_editor_absoluteX="165dp"
-            tools:layout_editor_absoluteY="85dp" />
+Aliquam felis orci, commodo ut pellentesque ac, rutrum vel augue. Donec vel diam elit. Integer non augue vitae magna sagittis aliquet. Nullam id suscipit eros. Suspendisse molestie porta augue, vel fringilla dui scelerisque vulputate. Pellentesque finibus pharetra sem. Praesent porttitor suscipit quam, sit amet fringilla lectus iaculis quis. Ut eu mauris et lorem commodo ullamcorper at non elit. Praesent interdum et leo a mattis. Mauris hendrerit eu urna et porttitor. Etiam mollis aliquam dolor in facilisis." />
     </ScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
