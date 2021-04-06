@@ -280,7 +280,7 @@ public class JournalFragment extends Fragment {
             // get the hour and minute from the resulting date
             Calendar date_res = Calendar.getInstance();
             date_res.setTime(res);
-            int hour = date_res.get(Calendar.HOUR);
+            int hour = date_res.get(Calendar.HOUR_OF_DAY);
             int minute = date_res.get(Calendar.MINUTE);
 
             // create the final date
