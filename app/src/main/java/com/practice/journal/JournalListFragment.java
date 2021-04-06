@@ -15,9 +15,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +26,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.xml.sax.HandlerBase;
 
 import java.util.List;
 import java.util.UUID;
@@ -33,6 +33,8 @@ import java.util.UUID;
 public class JournalListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private JournalAdapter mAdapter;
+    private LinearLayout mFirstEntryView;
+    private Button mNewEntryButton;
 
     private static final int REQUEST_PROMPT_DELETE = 1;
 
@@ -56,6 +58,14 @@ public class JournalListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_journal_list, container, false);
+
+        // get reference to the linear layout containing the first entry view and button
+        mFirstEntryView = view.findViewById(R.id.list_empty);
+        mNewEntryButton = view.findViewById(R.id.new_entry);
+
+        // TODO: set listener to new entry button
+
+
 
         // get reference to the recycler view
         mRecyclerView = view.findViewById(R.id.entry_recycler_view);
@@ -258,9 +268,12 @@ public class JournalListFragment extends Fragment {
     }
 
 
-
-
-
+    /**
+     * Method to be called when a launched activity or fragment has returned.
+     * @param requestCode   The request code used to launch the fragment or activity.
+     * @param resultCode    The result code or the exit code of the launched activity or fragment.
+     * @param data  An Intent containing returned data.
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         // check if the result is OK
@@ -276,11 +289,21 @@ public class JournalListFragment extends Fragment {
             String uuidString = (String) data.getSerializableExtra(PromptDeleteEntryFragment.EXTRA_PROMPT_ENTRYID);
             UUID uuid = UUID.fromString(uuidString);
 
-            // if val is true delete the
+            // if val is true delete the entry
             if (val) {
                 EntryStash.get(getContext()).deleteEntry(uuid);
                 updateUI();
             }
         }
+    }
+
+
+    /*
+        Hides the TextView and Button for helping the user in adding their first Journal Entry.
+        They should only be seen when the list of entries is empty.
+     */
+    private void hideFirstEntryView() {
+        // set the visibility to GONE
+        mFirstEntryView.setVisibility(View.GONE);
     }
 }
