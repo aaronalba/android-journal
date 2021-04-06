@@ -75,6 +75,10 @@ public class JournalListFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
 
+
+        // update the UI of the Fragment
+        updateUI();
+
         return view;
     }
 
@@ -131,13 +135,27 @@ public class JournalListFragment extends Fragment {
     }
 
 
-    // this updates the items shown in the RecyclerView
+    /*
+        This method updates the UI of the fragment.
+        functions:
+            - Shows the new entry button if the list is empty.
+            - Tells the adapter to update the UI of the recyclerview using the latest list from EntryStash
+     */
     private void updateUI() {
         // get the current list of Entries
         List<Entry> list = EntryStash.get(getContext()).getEntries();
 
-        // update the list in the adapter
+        // check if the new entry button should be shown
+        if (list.size() < 1) {
+            showFirstEntryView(true);
+        } else {
+            showFirstEntryView(false);
+        }
+
+        // update the list held by the Adapter
         mAdapter.setList(list);
+
+        // tell the adapter to update the items in the recycler view using the new list that was set
         mAdapter.notifyDataSetChanged();
     }
 
@@ -299,11 +317,16 @@ public class JournalListFragment extends Fragment {
 
 
     /*
-        Hides the TextView and Button for helping the user in adding their first Journal Entry.
+        Shows or Hides the TextView and Button for helping the user in adding their first Journal Entry.
         They should only be seen when the list of entries is empty.
      */
-    private void hideFirstEntryView() {
+    private void showFirstEntryView(boolean visible) {
         // set the visibility to GONE
-        mFirstEntryView.setVisibility(View.GONE);
+        if (visible) {
+            mFirstEntryView.setVisibility(View.VISIBLE);
+        } else {
+            mFirstEntryView.setVisibility(View.GONE);
+        }
+
     }
 }
