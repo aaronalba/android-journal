@@ -14,10 +14,14 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -57,6 +61,9 @@ public class JournalFragment extends Fragment {
 
         // set the entry object
         mEntry = EntryStash.get(getContext()).getEntry(id);
+
+        // enable options menu in the toolbar of this activity
+        setHasOptionsMenu(true);
     }
 
 
@@ -183,6 +190,45 @@ public class JournalFragment extends Fragment {
     }
 
 
+    /**
+     * Inflates the layout for the toolbar options menu.
+     * @param menu The menu object.
+     * @param inflater  The layout inflater of the options menu.
+     */
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+
+        // inflate the menu layout
+        inflater.inflate(R.menu.fragment_journal, menu);
+    }
+
+
+    /**
+     * Defines the actions to be taken when a menu item in the toolbar has been pressed.
+     * @param item The menu item that was clicked.
+     * @return boolean value, true if further processing is not needed.
+     */
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_done:
+                getActivity().onBackPressed(); // simulate pressing of the back button
+                syncDatabase(); // save the changes in the Entry to the database
+                return true;
+        }
+
+        // default case
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    /**
+     * Method to be called when a launched activity or fragment has returned.
+     * @param requestCode   The request code used to launch the fragment or activity.
+     * @param resultCode    The result code or the exit code of the launched activity or fragment.
+     * @param data  An Intent containing returned data.
+     */
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         // check if the result code is OK
