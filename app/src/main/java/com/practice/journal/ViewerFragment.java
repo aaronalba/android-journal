@@ -7,6 +7,9 @@ package com.practice.journal;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -35,6 +38,9 @@ public class ViewerFragment extends Fragment {
 
         // get the Entry using the UUID
         mEntry = EntryStash.get(getContext()).getEntry(id);
+
+        // enable the menu on the toolbar
+        setHasOptionsMenu(true);
     }
 
 
@@ -69,8 +75,6 @@ public class ViewerFragment extends Fragment {
         // inflate the layout
         View view = inflater.inflate(R.layout.fragment_viewer, container, false);
 
-        Toast.makeText(getContext(), mEntry.getTitle(), Toast.LENGTH_SHORT).show();
-
         // get the references to the Views in the layout and set its values
         titleTextField = view.findViewById(R.id.title_viewer);
         titleTextField.setText(mEntry.getTitle());
@@ -82,5 +86,45 @@ public class ViewerFragment extends Fragment {
         contentTextField.setText(mEntry.getContent());
 
         return view;
+    }
+
+
+    /**
+     * Inflates the menu on the app's toolbar.
+     * @param menu The menu.
+     * @param inflater The layout for the menu.
+     */
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.fragment_viewer, menu);
+    }
+
+
+    /**
+     * Defines the actions to be performed when an item in the options menu has been pressed.
+     * @param item The menu item that was pressed.
+     * @return boolean value, true if no more processing is needed.
+     */
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_edit:
+                // TODO: implement action for menu_edit option
+
+                return true;
+
+            case R.id.menu_delete:
+                // delete the entry in the EntryStash
+                EntryStash.get(getContext()).deleteEntry(mEntry.getId());
+
+                // exit this viewer activity and go back to the list
+                getActivity().onBackPressed();
+
+                return true;
+        }
+
+        // default case
+        return super.onOptionsItemSelected(item);
     }
 }
