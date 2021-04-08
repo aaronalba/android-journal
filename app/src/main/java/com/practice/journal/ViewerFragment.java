@@ -5,6 +5,7 @@
 
 package com.practice.journal;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -110,7 +111,9 @@ public class ViewerFragment extends Fragment {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menu_edit:
-                // TODO: implement action for menu_edit option
+                // create the intent to launch the new activity and start it
+                Intent intent = JournalActivity.newIntent(getContext(), mEntry.getId());
+                startActivity(intent);
 
                 return true;
 
