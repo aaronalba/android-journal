@@ -268,7 +268,7 @@ public class JournalListFragment extends Fragment {
             // show a prompt to confirm delete operation
             PromptDeleteEntryFragment dialog = new PromptDeleteEntryFragment(
                     getString(R.string.prompt_delete_entry),
-                    getString(R.string.prompt_confirm),
+                    getString(R.string.delete),
                     mEntry
             );
             dialog.setTargetFragment(JournalListFragment.this, REQUEST_PROMPT_DELETE);

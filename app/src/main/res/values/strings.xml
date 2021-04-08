@@ -14,4 +14,5 @@
     <string name="list_empty_header">Add your first Journal Entry</string>
     <string name="edit_entry">Edit Entry</string>
     <string name="delete_entry">Delete entry</string>
+    <string name="delete">Delete</string>
 </resources>
