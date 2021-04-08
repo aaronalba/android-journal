@@ -46,6 +46,16 @@ public class ViewerFragment extends Fragment {
 
 
     /**
+     * This lifecycle method is called when the Fragment is on the foreground again
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
+
+    /**
      * Used in creating a ViewerFragment instance with an id argument telling which Entry in the
      * list of entries that the fragment will preview.
      * @param id The UUID of the Entry object.
@@ -129,5 +139,22 @@ public class ViewerFragment extends Fragment {
 
         // default case
         return super.onOptionsItemSelected(item);
+    }
+
+
+    /*
+        Updates the Entry object in this Viewer and the updated Entry's data will be used by the Views
+     */
+    private void updateUI() {
+        // update the entry object
+        mEntry = EntryStash.get(getContext()).getEntry(mEntry.getId());
+
+        // update the Views
+        titleTextField.setText(mEntry.getTitle());
+
+        String dateTime = JournalUtil.formatDateTime(mEntry.getDate(), false);
+        dateTimeTextField.setText(dateTime);
+
+        contentTextField.setText(mEntry.getContent());
     }
 }
