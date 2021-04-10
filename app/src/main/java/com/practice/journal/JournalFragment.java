@@ -251,7 +251,7 @@ public class JournalFragment extends Fragment {
             // get the time date from the current date
             Calendar date_current = Calendar.getInstance();
             date_current.setTime(mEntry.getDate());
-            int hour = date_current.get(Calendar.HOUR);
+            int hour = date_current.get(Calendar.HOUR_OF_DAY);
             int minute = date_current.get(Calendar.MINUTE);
             int sec = date_current.get(Calendar.SECOND);
 
