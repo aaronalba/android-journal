@@ -5,6 +5,7 @@
 
 package com.practice.journal;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -29,6 +30,10 @@ public class ViewerFragment extends Fragment {
     private Entry mEntry;
 
     private static final String ARGS_ENTRY_ID = "uuid";
+
+    private static final String TAG_PROMPT_DELETE = "tag_prompt_delete";
+
+    private static final int REQUEST_PROMPT_DELETE = 1;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -128,11 +133,14 @@ public class ViewerFragment extends Fragment {
                 return true;
 
             case R.id.menu_delete:
-                // delete the entry in the EntryStash
-                EntryStash.get(getContext()).deleteEntry(mEntry.getId());
-
-                // exit this viewer activity and go back to the list
-                getActivity().onBackPressed();
+                // show delete prompt to confirm delete operation
+                PromptDeleteEntryFragment prompt = new PromptDeleteEntryFragment(
+                        getString(R.string.prompt_delete_entry),
+                        getString(R.string.delete),
+                        mEntry
+                );
+                prompt.setTargetFragment(this, REQUEST_PROMPT_DELETE);
+                prompt.show(getFragmentManager(), TAG_PROMPT_DELETE);
 
                 return true;
         }
@@ -142,9 +150,41 @@ public class ViewerFragment extends Fragment {
     }
 
 
-    /*
-        Updates the Entry object in this Viewer and the updated Entry's data will be used by the Views
+    /**
+     * Defines actions to be performed when an Activity or Fragment that is called by this Fragment has returned.
+     * @param requestCode the request code used to pick which activity has returned.
+     * @param resultCode tells the return status.
+     * @param data the data passed from the returned activity.
      */
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (resultCode != Activity.RESULT_OK) {
+            // do not process if there is an error in the result code
+            return;
+        }
+
+        if (requestCode == REQUEST_PROMPT_DELETE) {
+            // get the value from the prompt
+            boolean value = (boolean) data.getSerializableExtra(PromptDeleteEntryFragment.EXTRA_PROMPT);
+
+            // get the id of the entry to be deleted
+            String uuidString = (String) data.getSerializableExtra(PromptDeleteEntryFragment.EXTRA_PROMPT_ENTRYID);
+            UUID uuid = UUID.fromString(uuidString);
+
+            // delete the entry depending on the retrieved boolean value
+            if (value) {
+                // delete the entry
+                EntryStash.get(getContext()).deleteEntry(uuid);
+
+                // go back the activity stack once, simulate pressing of the back button.
+                getActivity().onBackPressed();
+            }
+        }
+    }
+
+    /*
+            Updates the Entry object in this Viewer and the updated Entry's data will be used by the Views
+         */
     private void updateUI() {
         // update the entry object
         mEntry = EntryStash.get(getContext()).getEntry(mEntry.getId());
