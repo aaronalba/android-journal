@@ -25,7 +25,7 @@ import androidx.fragment.app.Fragment;
 
 import com.practice.journal.models.Entry;
 import com.practice.journal.models.EntryStash;
-import com.practice.journal.JournalUtil;
+import com.practice.journal.utils.JournalUtil;
 import com.practice.journal.R;
 
 import java.util.Calendar;

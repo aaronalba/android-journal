@@ -3,7 +3,7 @@
  * @author Aaron Alba
  */
 
-package com.practice.journal;
+package com.practice.journal.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
