@@ -30,10 +30,7 @@ public class JournalLoginFragment extends Fragment {
 
     /**
      * This method inflates the view that this fragment will use and get references to the widgets defined in that layout
-     * @param inflater
-     * @param container
-     * @param savedInstanceState
-     * @return
+     * @return the root view of the layout
      */
     @Nullable
     @Override
@@ -47,6 +44,6 @@ public class JournalLoginFragment extends Fragment {
         // the login button
         mLoginButton = view.findViewById(R.id.login_button);
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        return view;
     }
 }
