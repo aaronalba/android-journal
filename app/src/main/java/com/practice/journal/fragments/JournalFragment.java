@@ -23,8 +23,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.practice.journal.Entry;
-import com.practice.journal.EntryStash;
+import com.practice.journal.models.Entry;
+import com.practice.journal.models.EntryStash;
 import com.practice.journal.JournalUtil;
 import com.practice.journal.R;
 

@@ -3,7 +3,7 @@
  * @author Aaron Alba
  */
 
-package com.practice.journal;
+package com.practice.journal.models;
 
 import java.util.Date;
 import java.util.UUID;

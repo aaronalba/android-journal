@@ -9,7 +9,7 @@ package com.practice.journal.db;
 import android.database.Cursor;
 import android.database.CursorWrapper;
 
-import com.practice.journal.Entry;
+import com.practice.journal.models.Entry;
 import com.practice.journal.db.EntryDbSchema.EntryTable;
 
 import java.util.Date;

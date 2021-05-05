@@ -5,22 +5,18 @@
  * @author Aaron Alba
  */
 
-package com.practice.journal;
+package com.practice.journal.models;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import androidx.annotation.NonNull;
-
 import com.practice.journal.db.EntryCursorWrapper;
 import com.practice.journal.db.EntryDbOpenHelper;
-import com.practice.journal.db.EntryDbSchema;
 import com.practice.journal.db.EntryDbSchema.EntryTable;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 

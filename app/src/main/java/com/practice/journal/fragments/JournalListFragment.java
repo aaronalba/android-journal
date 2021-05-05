@@ -27,8 +27,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-import com.practice.journal.Entry;
-import com.practice.journal.EntryStash;
+import com.practice.journal.models.Entry;
+import com.practice.journal.models.EntryStash;
 import com.practice.journal.JournalUtil;
 import com.practice.journal.R;
 import com.practice.journal.activities.JournalActivity;

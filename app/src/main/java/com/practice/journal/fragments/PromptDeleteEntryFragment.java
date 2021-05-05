@@ -8,7 +8,7 @@ package com.practice.journal.fragments;
 import android.app.Activity;
 import android.content.Intent;
 
-import com.practice.journal.Entry;
+import com.practice.journal.models.Entry;
 
 public class PromptDeleteEntryFragment extends PromptDialogFragment {
     private Entry mEntry;
