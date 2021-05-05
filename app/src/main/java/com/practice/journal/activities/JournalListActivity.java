@@ -3,9 +3,11 @@
  * @author Aaron Alba
  */
 
-package com.practice.journal;
+package com.practice.journal.activities;
 
 import androidx.fragment.app.Fragment;
+
+import com.practice.journal.JournalListFragment;
 
 public class JournalListActivity extends SingleFragmentActivity {
 

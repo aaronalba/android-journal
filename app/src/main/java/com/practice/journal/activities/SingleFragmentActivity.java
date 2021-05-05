@@ -3,7 +3,7 @@
  * @author Aaron Alba
  */
 
-package com.practice.journal;
+package com.practice.journal.activities;
 
 import android.os.Bundle;
 
@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
+import com.practice.journal.R;
 
 public abstract class SingleFragmentActivity extends AppCompatActivity {
     @Override

@@ -3,12 +3,14 @@
  * @author Aaron A. Alba
  */
 
-package com.practice.journal;
+package com.practice.journal.activities;
 
 import android.content.Context;
 import android.content.Intent;
 
 import androidx.fragment.app.Fragment;
+
+import com.practice.journal.ViewerFragment;
 
 import java.util.UUID;
 

@@ -27,6 +27,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.practice.journal.activities.JournalActivity;
+import com.practice.journal.activities.ViewerActivity;
+
 import java.util.List;
 import java.util.UUID;
 

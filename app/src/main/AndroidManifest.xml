@@ -9,14 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Journal">
-        <activity android:name=".JournalActivity" />
-        <activity android:name=".JournalListActivity">
+        <activity android:name=".activities.JournalActivity" />
+        <activity android:name=".activities.JournalListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ViewerActivity" />
+        <activity android:name=".activities.ViewerActivity" />
     </application>
 
 </manifest>
