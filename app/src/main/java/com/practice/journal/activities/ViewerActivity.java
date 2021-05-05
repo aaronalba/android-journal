@@ -10,7 +10,7 @@ import android.content.Intent;
 
 import androidx.fragment.app.Fragment;
 
-import com.practice.journal.ViewerFragment;
+import com.practice.journal.fragments.ViewerFragment;
 
 import java.util.UUID;
 

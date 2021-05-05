@@ -3,10 +3,12 @@
  * @author Aaron Alba
  */
 
-package com.practice.journal;
+package com.practice.journal.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+
+import com.practice.journal.Entry;
 
 public class PromptDeleteEntryFragment extends PromptDialogFragment {
     private Entry mEntry;

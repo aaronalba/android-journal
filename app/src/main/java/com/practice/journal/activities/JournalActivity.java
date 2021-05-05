@@ -11,7 +11,7 @@ import android.content.Intent;
 
 import androidx.fragment.app.Fragment;
 
-import com.practice.journal.JournalFragment;
+import com.practice.journal.fragments.JournalFragment;
 
 import java.util.UUID;
 

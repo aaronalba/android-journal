@@ -3,7 +3,7 @@
  * @author Aaron Alba
  */
 
-package com.practice.journal;
+package com.practice.journal.fragments;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -11,13 +11,11 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
-import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;

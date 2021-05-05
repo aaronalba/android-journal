@@ -3,7 +3,7 @@
  * @author Aaron Alba
  */
 
-package com.practice.journal;
+package com.practice.journal.fragments;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -11,7 +11,6 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.DatePicker;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

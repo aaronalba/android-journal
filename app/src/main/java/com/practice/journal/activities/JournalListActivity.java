@@ -7,7 +7,7 @@ package com.practice.journal.activities;
 
 import androidx.fragment.app.Fragment;
 
-import com.practice.journal.JournalListFragment;
+import com.practice.journal.fragments.JournalListFragment;
 
 public class JournalListActivity extends SingleFragmentActivity {
 

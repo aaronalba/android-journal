@@ -3,16 +3,13 @@
  * @author Aaron Alba
  */
 
-package com.practice.journal;
+package com.practice.journal.fragments;
 
 import android.app.Activity;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.text.format.DateUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -21,13 +18,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+
+import com.practice.journal.Entry;
+import com.practice.journal.EntryStash;
+import com.practice.journal.JournalUtil;
+import com.practice.journal.R;
 
 import java.util.Calendar;
 import java.util.Date;

@@ -3,7 +3,7 @@
  * @author Aaron Alba
  */
 
-package com.practice.journal;
+package com.practice.journal.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -20,6 +20,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.practice.journal.Entry;
+import com.practice.journal.EntryStash;
+import com.practice.journal.JournalUtil;
+import com.practice.journal.R;
 import com.practice.journal.activities.JournalActivity;
 
 import java.util.UUID;
