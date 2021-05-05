@@ -15,4 +15,6 @@
     <string name="edit_entry">Edit Entry</string>
     <string name="delete_entry">Delete entry</string>
     <string name="delete">Delete</string>
+    <string name="login_title">Please enter your pin</string>
+    <string name="login_button">Login</string>
 </resources>
