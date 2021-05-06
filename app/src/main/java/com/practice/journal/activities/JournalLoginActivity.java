@@ -14,7 +14,6 @@ public class JournalLoginActivity extends SingleFragmentActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        startActivity(new Intent(this, JournalSignupActivity.class));
     }
 
     /**

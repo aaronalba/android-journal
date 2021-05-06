@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,9 +23,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.practice.journal.R;
+import com.practice.journal.activities.JournalListActivity;
+import com.practice.journal.activities.JournalSignupActivity;
 import com.practice.journal.models.UserStash;
 
 public class JournalLoginFragment extends Fragment {
+    public static final int REQUEST_SIGNUP = 1;
+
     private EditText mPasswordField;
     private Button mLoginButton;
     private int mAttempts;
@@ -35,6 +40,13 @@ public class JournalLoginFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mAttempts = 0;
+
+        // check if the user has already been registered and launch the signup activity if not yet registered
+        boolean isRegistered = UserStash.get(getContext()).hasUser("user");
+        if (!isRegistered) {
+            Intent intent = new Intent(getActivity(), JournalSignupActivity.class);
+            startActivityForResult(intent, REQUEST_SIGNUP);
+        }
     }
 
 
@@ -58,25 +70,19 @@ public class JournalLoginFragment extends Fragment {
             public void onClick(View v) {
                 String pin = mPasswordField.getText().toString();
 
-                // show the entered PIN temporarily
-                Toast.makeText(getContext(), mPasswordField.getText() + " was entered!", Toast.LENGTH_SHORT).show();
-
                 // hide the on-screen keyboard
                 InputMethodManager manager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (manager != null) {
                     manager.hideSoftInputFromWindow(mPasswordField.getWindowToken(), 0);
                 }
 
-                // authenticate password
+                // authenticate pin
                 boolean isAuthenticated = UserStash.get(getContext()).authenticateSingleUser(pin);
                 if (isAuthenticated) {
-                    // create the success result to the calling activity
-                    Intent intent = new Intent();
-                    intent.putExtra(EXTRA_LOGIN_STATUS, true);
-                    getActivity().setResult(Activity.RESULT_OK, intent);
+                    // start the JournalList Activity
+                    Intent intent = new Intent(getContext(), JournalListActivity.class);
+                    startActivity(intent);
 
-                    // stop the activity and return the result
-                    getActivity().finish();
                 } else {
                     Toast.makeText(getContext(), getString(R.string.toast_pin_incorrect), Toast.LENGTH_SHORT).show();
                     mPasswordField.setText("");
@@ -87,5 +93,15 @@ public class JournalLoginFragment extends Fragment {
         });
 
         return view;
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        // check if the sign-up activity is cancelled
+        // this could happen if the user pressed the back button while in the sign-up screen
+        if (resultCode == Activity.RESULT_CANCELED && requestCode == REQUEST_SIGNUP) {
+            getActivity().finish(); // end the application
+        }
     }
 }

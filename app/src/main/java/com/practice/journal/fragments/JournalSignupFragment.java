@@ -5,6 +5,7 @@
 
 package com.practice.journal.fragments;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -94,6 +95,7 @@ public class JournalSignupFragment extends Fragment {
                     // end the activity
                     Intent intent = new Intent();
                     intent.putExtra(EXTRA_SIGNUP_STATUS, true);
+                    getActivity().setResult(Activity.RESULT_OK);
                     getActivity().finish();
 
                 } else {
