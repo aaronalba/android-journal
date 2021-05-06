@@ -21,4 +21,13 @@ public final class EntryDbSchema {
             public static final String CONTENT = "content";
         }
     }
+
+    // table 2 - User Table
+    public static final class UserTable {
+        public static final String NAME = "user";
+        public static final class COLS {
+            public static final String name = "username";
+            public static final String pin = "pin";
+        }
+    }
 }
