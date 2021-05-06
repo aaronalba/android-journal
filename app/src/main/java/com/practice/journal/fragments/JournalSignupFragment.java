@@ -88,7 +88,7 @@ public class JournalSignupFragment extends Fragment {
                 if (pin.equals(confirm)) {
 
                     // create the user
-                    UserStash.get(getContext()).createUser(user);
+                    UserStash.get(getContext()).createUser(new User("user", user.getPin()));    // temporarily hardcode the username to user
                     Toast.makeText(getContext(), getString(R.string.toast_user_created), Toast.LENGTH_SHORT).show();
 
                     // end the activity
