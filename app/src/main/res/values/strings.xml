@@ -23,4 +23,10 @@
     <string name="name">Name</string>
     <string name="pin">Enter your pin</string>
     <string name="pin_confirm">Confirm your pin</string>
+    <string name="toast_unmatched_pin">Pin does not match. Please try again</string>
+    <string name="toast_user_created">User has been successfully created</string>
+    <string name="toast_user_exist">Name has already been registered</string>
+    <string name="toast_user_notexist">Name is not yet registered</string>
+    <string name="toast_noname">Please enter a name</string>
+    <string name="toast_pin_min_length">the pin should be at least 4 digits</string>
 </resources>
