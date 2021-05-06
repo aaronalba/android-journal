@@ -30,6 +30,8 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+        // create Entry table
         db.execSQL("CREATE TABLE " + EntryTable.NAME + "("
                 + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + EntryTable.COLS.UUID + ", "
@@ -38,6 +40,13 @@ public class DatabaseOpenHelper extends SQLiteOpenHelper {
                 + EntryTable.COLS.CONTENT
                 + ")"
         );
+
+
+        // create User table
+        db.execSQL("CREATE TABLE " + EntryTable.NAME + "("
+                + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + DatabaseSchema.UserTable.COLS.NAME + ", "
+                + DatabaseSchema.UserTable.COLS.NAME + ")" );
     }
 
     @Override

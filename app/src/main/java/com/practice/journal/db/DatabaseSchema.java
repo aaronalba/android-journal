@@ -26,8 +26,8 @@ public final class DatabaseSchema {
     public static final class UserTable {
         public static final String NAME = "user";
         public static final class COLS {
-            public static final String name = "username";
-            public static final String pin = "pin";
+            public static final String NAME = "username";
+            public static final String PIN = "pin";
         }
     }
 }
