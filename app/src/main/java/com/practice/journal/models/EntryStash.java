@@ -31,7 +31,7 @@ public class EntryStash {
     // Private constructor to avoid instantiating objects from this class
     private EntryStash(Context context) {
         // create or open the database using the EntryDbOpenHelper class
-        mDatabase = new DatabaseOpenHelper(context).getWritableDatabase();
+        mDatabase = DatabaseOpenHelper.getDatabase(context);
     }
 
 

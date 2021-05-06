@@ -1,5 +1,6 @@
 /**
  * This class is an SQLiteOpenHelper that is responsible for creating, reading and updating the database.
+ * This class now also maintains the single instance of the database for this application.
  * @author Aaron Alba
  */
 
@@ -11,17 +12,32 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.practice.journal.db.DatabaseSchema.EntryTable;
 
-public class DatabaseOpenHelper extends SQLiteOpenHelper {
+public final class DatabaseOpenHelper extends SQLiteOpenHelper {
+    private static SQLiteDatabase sDatabase;
     private static final int VERSION = 1;
-    private static final String DATABASE_NAME = "entryDatabase.db";
+    private static final String DATABASE_NAME = "journal_database.db";
 
     /**
      * Class constructor for creating this Database Open Helper object.
      * @param context The application's context. Used for locating the path of this database in the app's folder
      */
-    public DatabaseOpenHelper(Context context) {
+    private DatabaseOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
+
+
+    /**
+     * Returns an instance of the SQLite Database for this application.
+     * @param context The application context.
+     * @return instance of the SQLite database.
+     */
+    public static SQLiteDatabase getDatabase(Context context) {
+        if (sDatabase == null) {
+            sDatabase = new DatabaseOpenHelper(context).getWritableDatabase();
+        }
+        return sDatabase;
+    }
+
 
 
     /**
