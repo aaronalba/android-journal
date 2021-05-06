@@ -9,8 +9,10 @@ package com.practice.journal.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import com.practice.journal.db.DatabaseSchema.EntryTable;
+import com.practice.journal.db.DatabaseSchema.UserTable;
 
 public final class DatabaseOpenHelper extends SQLiteOpenHelper {
     private static SQLiteDatabase sDatabase;
@@ -33,6 +35,7 @@ public final class DatabaseOpenHelper extends SQLiteOpenHelper {
      */
     public static SQLiteDatabase getDatabase(Context context) {
         if (sDatabase == null) {
+            Log.d("DATABASE", "database is not yet instantiated");
             sDatabase = new DatabaseOpenHelper(context).getWritableDatabase();
         }
         return sDatabase;
@@ -59,10 +62,10 @@ public final class DatabaseOpenHelper extends SQLiteOpenHelper {
 
 
         // create User table
-        db.execSQL("CREATE TABLE " + EntryTable.NAME + "("
+        db.execSQL("CREATE TABLE " + UserTable.NAME + "("
                 + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + DatabaseSchema.UserTable.COLS.NAME + ", "
-                + DatabaseSchema.UserTable.COLS.NAME + ")" );
+                + UserTable.COLS.NAME + ", "
+                + UserTable.COLS.PIN + ")" );
     }
 
     @Override
