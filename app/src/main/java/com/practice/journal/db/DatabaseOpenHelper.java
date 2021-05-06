@@ -11,7 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.practice.journal.db.DatabaseSchema.EntryTable;
 
-public class EntryDbOpenHelper extends SQLiteOpenHelper {
+public class DatabaseOpenHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
     private static final String DATABASE_NAME = "entryDatabase.db";
 
@@ -19,7 +19,7 @@ public class EntryDbOpenHelper extends SQLiteOpenHelper {
      * Class constructor for creating this Database Open Helper object.
      * @param context The application's context. Used for locating the path of this database in the app's folder
      */
-    public EntryDbOpenHelper(Context context) {
+    public DatabaseOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
 

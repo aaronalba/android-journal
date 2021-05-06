@@ -13,7 +13,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.practice.journal.db.EntryCursorWrapper;
-import com.practice.journal.db.EntryDbOpenHelper;
+import com.practice.journal.db.DatabaseOpenHelper;
 import com.practice.journal.db.DatabaseSchema.EntryTable;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class EntryStash {
     // Private constructor to avoid instantiating objects from this class
     private EntryStash(Context context) {
         // create or open the database using the EntryDbOpenHelper class
-        mDatabase = new EntryDbOpenHelper(context).getWritableDatabase();
+        mDatabase = new DatabaseOpenHelper(context).getWritableDatabase();
     }
 
 
