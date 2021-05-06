@@ -7,9 +7,9 @@
 
 package com.practice.journal.db;
 
-public final class EntryDbSchema {
+public final class DatabaseSchema {
     // private constructor to avoid instantiation of this class
-    private EntryDbSchema() {}
+    private DatabaseSchema() {}
 
     // table 1 - Entry Table
     public static final class EntryTable {
@@ -19,6 +19,15 @@ public final class EntryDbSchema {
             public static final String TITLE = "title";
             public static final String DATE = "date";
             public static final String CONTENT = "content";
+        }
+    }
+
+    // table 2 - User Table
+    public static final class UserTable {
+        public static final String NAME = "user";
+        public static final class COLS {
+            public static final String NAME = "username";
+            public static final String PIN = "pin";
         }
     }
 }

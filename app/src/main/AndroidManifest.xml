@@ -9,8 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Journal">
+        <activity android:name=".activities.JournalSignupActivity" />
+        <activity android:name=".activities.JournalListActivity" />
         <activity android:name=".activities.JournalActivity" />
-        <activity android:name=".activities.JournalListActivity">
+        <activity android:name=".activities.JournalLoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

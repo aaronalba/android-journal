@@ -1,5 +1,6 @@
 /**
  * This class is an SQLiteOpenHelper that is responsible for creating, reading and updating the database.
+ * This class now also maintains the single instance of the database for this application.
  * @author Aaron Alba
  */
 
@@ -8,20 +9,38 @@ package com.practice.journal.db;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
-import com.practice.journal.db.EntryDbSchema.EntryTable;
+import com.practice.journal.db.DatabaseSchema.EntryTable;
+import com.practice.journal.db.DatabaseSchema.UserTable;
 
-public class EntryDbOpenHelper extends SQLiteOpenHelper {
+public final class DatabaseOpenHelper extends SQLiteOpenHelper {
+    private static SQLiteDatabase sDatabase;
     private static final int VERSION = 1;
-    private static final String DATABASE_NAME = "entryDatabase.db";
+    private static final String DATABASE_NAME = "journal_database.db";
 
     /**
      * Class constructor for creating this Database Open Helper object.
      * @param context The application's context. Used for locating the path of this database in the app's folder
      */
-    public EntryDbOpenHelper(Context context) {
+    private DatabaseOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
     }
+
+
+    /**
+     * Returns an instance of the SQLite Database for this application.
+     * @param context The application context.
+     * @return instance of the SQLite database.
+     */
+    public static SQLiteDatabase getDatabase(Context context) {
+        if (sDatabase == null) {
+            Log.d("DATABASE", "database is not yet instantiated");
+            sDatabase = new DatabaseOpenHelper(context).getWritableDatabase();
+        }
+        return sDatabase;
+    }
+
 
 
     /**
@@ -30,6 +49,8 @@ public class EntryDbOpenHelper extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+        // create Entry table
         db.execSQL("CREATE TABLE " + EntryTable.NAME + "("
                 + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + EntryTable.COLS.UUID + ", "
@@ -38,6 +59,13 @@ public class EntryDbOpenHelper extends SQLiteOpenHelper {
                 + EntryTable.COLS.CONTENT
                 + ")"
         );
+
+
+        // create User table
+        db.execSQL("CREATE TABLE " + UserTable.NAME + "("
+                + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + UserTable.COLS.NAME + ", "
+                + UserTable.COLS.PIN + ")" );
     }
 
     @Override
