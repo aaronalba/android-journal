@@ -92,6 +92,24 @@ public class UserStash {
 
 
     /**
+     * Queries the database to check if the given password is correct.
+     * This method will be used until the multi-user implementation is not yet written.
+     * @param pin the pin to unlock the app.
+     * @return boolean value to check if the pin was correct.
+     */
+    public boolean authenticateSingleUser(String pin) {
+        // get the pin of the stated user name
+        String userPin = getPin("user");
+
+        // check for equality
+        if (pin.equals(userPin)) {
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
      * Adds the given user to the application database.
      * @param user The User object to be added.
      */
