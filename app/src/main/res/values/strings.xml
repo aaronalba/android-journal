@@ -29,4 +29,5 @@
     <string name="toast_user_notexist">Name is not yet registered</string>
     <string name="toast_noname">Please enter a name</string>
     <string name="toast_pin_min_length">the pin should be at least 4 digits</string>
+    <string name="toast_pin_incorrect">The entered pin is incorrect</string>
 </resources>

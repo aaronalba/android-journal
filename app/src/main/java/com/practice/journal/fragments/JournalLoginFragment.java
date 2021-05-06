@@ -5,7 +5,9 @@
 
 package com.practice.journal.fragments;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,14 +22,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.practice.journal.R;
+import com.practice.journal.models.UserStash;
 
 public class JournalLoginFragment extends Fragment {
     private EditText mPasswordField;
     private Button mLoginButton;
+    private int mAttempts;
+
+    public static final String EXTRA_LOGIN_STATUS = "login_status";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mAttempts = 0;
     }
 
 
@@ -49,6 +56,8 @@ public class JournalLoginFragment extends Fragment {
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String pin = mPasswordField.getText().toString();
+
                 // show the entered PIN temporarily
                 Toast.makeText(getContext(), mPasswordField.getText() + " was entered!", Toast.LENGTH_SHORT).show();
 
@@ -56,6 +65,23 @@ public class JournalLoginFragment extends Fragment {
                 InputMethodManager manager = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
                 if (manager != null) {
                     manager.hideSoftInputFromWindow(mPasswordField.getWindowToken(), 0);
+                }
+
+                // authenticate password
+                boolean isAuthenticated = UserStash.get(getContext()).authenticateSingleUser(pin);
+                if (isAuthenticated) {
+                    // create the success result to the calling activity
+                    Intent intent = new Intent();
+                    intent.putExtra(EXTRA_LOGIN_STATUS, true);
+                    getActivity().setResult(Activity.RESULT_OK, intent);
+
+                    // stop the activity and return the result
+                    getActivity().finish();
+                } else {
+                    Toast.makeText(getContext(), getString(R.string.toast_pin_incorrect), Toast.LENGTH_SHORT).show();
+                    mPasswordField.setText("");
+                    mPasswordField.requestFocus();
+                    mAttempts++;
                 }
             }
         });
