@@ -7,9 +7,9 @@
 
 package com.practice.journal.db;
 
-public final class EntryDbSchema {
+public final class DatabaseSchema {
     // private constructor to avoid instantiation of this class
-    private EntryDbSchema() {}
+    private DatabaseSchema() {}
 
     // table 1 - Entry Table
     public static final class EntryTable {

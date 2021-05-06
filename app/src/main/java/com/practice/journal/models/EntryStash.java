@@ -14,7 +14,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.practice.journal.db.EntryCursorWrapper;
 import com.practice.journal.db.EntryDbOpenHelper;
-import com.practice.journal.db.EntryDbSchema.EntryTable;
+import com.practice.journal.db.DatabaseSchema.EntryTable;
 
 import java.util.ArrayList;
 import java.util.List;

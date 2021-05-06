@@ -10,7 +10,7 @@ import android.database.Cursor;
 import android.database.CursorWrapper;
 
 import com.practice.journal.models.Entry;
-import com.practice.journal.db.EntryDbSchema.EntryTable;
+import com.practice.journal.db.DatabaseSchema.EntryTable;
 
 import java.util.Date;
 

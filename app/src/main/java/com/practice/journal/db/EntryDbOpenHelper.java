@@ -9,7 +9,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.practice.journal.db.EntryDbSchema.EntryTable;
+import com.practice.journal.db.DatabaseSchema.EntryTable;
 
 public class EntryDbOpenHelper extends SQLiteOpenHelper {
     private static final int VERSION = 1;
