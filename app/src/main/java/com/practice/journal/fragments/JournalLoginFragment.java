@@ -82,6 +82,7 @@ public class JournalLoginFragment extends Fragment {
                     // start the JournalList Activity
                     Intent intent = new Intent(getContext(), JournalListActivity.class);
                     startActivity(intent);
+                    getActivity().finish();
 
                 } else {
                     Toast.makeText(getContext(), getString(R.string.toast_pin_incorrect), Toast.LENGTH_SHORT).show();
